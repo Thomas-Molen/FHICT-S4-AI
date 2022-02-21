@@ -67,20 +67,30 @@ namespace TMDBScraper
             using (var writer = new StreamWriter(csvLocation))
             using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
             {
-                csv.WriteHeader<TMDbLib.Objects.Movies.Movie>();
-                csv.NextRecord();
-                while (jsonReader.Read())
+                try
                 {
-                    if (jsonReader.LineNumber % 1000 == 0)
-                    {
-                        Console.WriteLine("Read " + jsonReader.LineNumber + " Lines");
-                    }
-                    TMDBIdEntry movieIdEntry = jsonSerializer.Deserialize<TMDBIdEntry>(jsonReader);
-                    var movieToAdd = TMDBclient.GetMovieAsync(movieIdEntry.id).Result;
-                    csv.WriteRecord(movieToAdd);
+                    csv.WriteHeader<TMDbLib.Objects.Movies.Movie>();
                     csv.NextRecord();
+                    while (jsonReader.Read())
+                    {
+                        if (jsonReader.LineNumber % 1000 == 0)
+                        {
+                            Console.WriteLine("Read " + jsonReader.LineNumber + " Lines");
+                        }
+                        TMDBIdEntry movieIdEntry = jsonSerializer.Deserialize<TMDBIdEntry>(jsonReader);
+                        var movieToAdd = TMDBclient.GetMovieAsync(movieIdEntry.id).Result;
+                        csv.WriteRecord(movieToAdd);
+                        csv.NextRecord();
+                    }
+                    writer.Flush();
                 }
-                writer.Flush();
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Unexpected error occured:\n" + ex);
+                    File.Delete(tmdbIdsLocation);
+                    throw;
+                }
+                
             }
 
             File.Delete(tmdbIdsLocation);
