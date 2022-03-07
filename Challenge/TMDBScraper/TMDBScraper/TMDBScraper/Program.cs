@@ -71,16 +71,26 @@ namespace TMDBScraper
                 {
                     csv.WriteHeader<TMDbLib.Objects.Movies.Movie>();
                     csv.NextRecord();
+
+                    TMDBIdEntry movieIdEntry = new TMDBIdEntry();
                     while (jsonReader.Read())
                     {
-                        if (jsonReader.LineNumber % 1000 == 0)
+                        try
                         {
-                            Console.WriteLine("Read " + jsonReader.LineNumber + " Lines");
+                            if (jsonReader.LineNumber % 100 == 0)
+                            {
+                                Console.WriteLine("Read " + jsonReader.LineNumber + " Lines");
+                            }
+                            movieIdEntry = jsonSerializer.Deserialize<TMDBIdEntry>(jsonReader);
+                            var movieToAdd = TMDBclient.GetMovieAsync(movieIdEntry.id).Result;
+                            csv.WriteRecord(movieToAdd);
+                            csv.NextRecord();
                         }
-                        TMDBIdEntry movieIdEntry = jsonSerializer.Deserialize<TMDBIdEntry>(jsonReader);
-                        var movieToAdd = TMDBclient.GetMovieAsync(movieIdEntry.id).Result;
-                        csv.WriteRecord(movieToAdd);
-                        csv.NextRecord();
+                        catch (Exception)
+                        {
+                            Console.WriteLine($"Skipping Entry: {jsonReader.LineNumber} ({movieIdEntry?.original_title})");
+                            continue;
+                        }
                     }
                     writer.Flush();
                 }
@@ -88,13 +98,15 @@ namespace TMDBScraper
                 {
                     Console.WriteLine("Unexpected error occured:\n" + ex);
                     File.Delete(tmdbIdsLocation);
-                    throw;
                 }
                 
             }
 
             File.Delete(tmdbIdsLocation);
             Console.WriteLine("Done!");
+            Console.WriteLine("Press any key to close");
+            Console.ReadLine();
+
 
             //read file
             //using (var reader = new StreamReader(csvLocation))
