@@ -471,3 +471,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Challenge dataset file
+Challenge/*.csv
