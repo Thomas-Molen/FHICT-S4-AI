@@ -4,9 +4,22 @@ using System.Text;
 
 namespace TMDBScraper.Models
 {
-    class Movie
+    public class Movie
     {
-        public int id { get; set; }
-        public string name { get; set; }
+        public int? Id { get; set; }
+        public string ImdbId { get; set; }
+        public bool? Collection { get; set; }
+        public long? Budget { get; set; }
+        public string Genre { get; set; }
+        public string Language { get; set; }
+        public double? Popularity { get; set; }
+        public string Company { get; set; }
+        public string Country { get; set; }
+        public DateTime? Release { get; set; }
+        public long? Revenue { get; set; }
+        public int? Runtime { get; set; }
+        public string Title { get; set; }
+        public int? Cast { get; set; }
+        public int? Crew { get; set; }
     }
 }

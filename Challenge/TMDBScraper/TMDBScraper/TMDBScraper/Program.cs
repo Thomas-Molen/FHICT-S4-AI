@@ -8,50 +8,26 @@ using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading.Tasks;
 using TMDbLib.Client;
+using TMDBScraper.Helpers;
 using TMDBScraper.Models;
 
 namespace TMDBScraper
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             //Create paths if not created yet
             Console.WriteLine("Initializing...");
-            string currentDateTime = DateTime.Now.ToString("dd_MM_yyyy_HHMMss");
-            string csvLocation = "OutputData/movies_"+ currentDateTime +".csv";
-            string tmdbCompressedIdsLocation = "InputData/tmdbIds_" + currentDateTime + ".json.gz";
-            string tmdbIdsLocation = "InputData/currentIds.json";
-
-            TMDbClient TMDBclient = new TMDbClient("22ccb4ae1a1568e8f54ba7191600477c");
-
-            Console.WriteLine("Setting up file paths");
-            Directory.CreateDirectory(Path.GetDirectoryName(csvLocation));
-            Directory.CreateDirectory(Path.GetDirectoryName("InputData/"));
-
-            //get a zipped tmdb json file
-            Console.WriteLine("Getting Id Sheet from TMDB servers");
-            using (var client = new WebClient())
-            {
-                client.DownloadFile(
-                    "http://files.tmdb.org/p/exports/movie_ids_"+ DateTime.Now.AddDays(-1).ToString("MM_dd_yyyy") + ".json.gz",
-                    tmdbCompressedIdsLocation
-                    );
-            }
-
-            //unzip json
-            using FileStream compressedFileStream = File.Open(tmdbCompressedIdsLocation, FileMode.Open);
-            using FileStream outputFileStream = File.Create(tmdbIdsLocation);
-            using var decompressor = new GZipStream(compressedFileStream, CompressionMode.Decompress);
-
-            decompressor.CopyTo(outputFileStream);
-            compressedFileStream.Close();
-            outputFileStream.Close();
+            FileHelper fileHelper = new FileHelper();
+            fileHelper.CreateDirectories();
+            fileHelper.CreateIdSheet();
 
             //read json
             string content;
-            using (StreamReader r = new StreamReader(tmdbIdsLocation))
+            using (StreamReader r = new StreamReader(fileHelper.tmdbIdsLocation))
             {
                 content = r.ReadToEnd();
             }
@@ -60,61 +36,43 @@ namespace TMDBScraper
             {
                 SupportMultipleContent = true
             };
-
-            var jsonSerializer = new JsonSerializer();
+            MovieHelper movieHelper = new MovieHelper(jsonReader);
 
             Console.WriteLine("Initialization complete! Starting Scraping process\n This can take a while.");
-            using (var writer = new StreamWriter(csvLocation))
-            using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+            try
             {
-                try
-                {
-                    csv.WriteHeader<TMDbLib.Objects.Movies.Movie>();
-                    csv.NextRecord();
+                fileHelper.CreateCSV();
 
-                    TMDBIdEntry movieIdEntry = new TMDBIdEntry();
-                    while (jsonReader.Read())
-                    {
-                        try
-                        {
-                            if (jsonReader.LineNumber % 100 == 0)
-                            {
-                                Console.WriteLine("Read " + jsonReader.LineNumber + " Lines");
-                            }
-                            movieIdEntry = jsonSerializer.Deserialize<TMDBIdEntry>(jsonReader);
-                            var movieToAdd = TMDBclient.GetMovieAsync(movieIdEntry.id).Result;
-                            csv.WriteRecord(movieToAdd);
-                            csv.NextRecord();
-                        }
-                        catch (Exception)
-                        {
-                            Console.WriteLine($"Skipping Entry: {jsonReader.LineNumber} ({movieIdEntry?.original_title})");
-                            continue;
-                        }
-                    }
-                    writer.Flush();
-                }
-                catch (Exception ex)
+                while (jsonReader.Read())
                 {
-                    Console.WriteLine("Unexpected error occured:\n" + ex);
-                    File.Delete(tmdbIdsLocation);
+                    try
+                    {
+                        if (jsonReader.LineNumber % 100 == 0)
+                        {
+                            Console.WriteLine("Read " + jsonReader.LineNumber + " Lines");
+                        }
+                        var movieToAdd = await movieHelper.GetNextMovie();
+
+                        fileHelper.WriteCSV(movieToAdd);
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine($"Skipping Entry: {jsonReader.LineNumber}");
+                        continue;
+                    }
                 }
-                
+            fileHelper.CloseCSV();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Unexpected error occured:\n" + ex);
+                fileHelper.DeleteIdSheet();
             }
 
-            File.Delete(tmdbIdsLocation);
+            fileHelper.DeleteIdSheet();
             Console.WriteLine("Done!");
             Console.WriteLine("Press any key to close");
             Console.ReadLine();
-
-
-            //read file
-            //using (var reader = new StreamReader(csvLocation))
-            //using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
-            //{
-            //    var records = csv.GetRecords<Movie>();
-            //    var movies = records.ToList();
-            //}
         }
     }
 }
