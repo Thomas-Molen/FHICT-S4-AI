@@ -1,0 +1,548 @@
+## ACME Wholesales
+## prepared from SalesForce on 03/01/2019
+##
+## Columns:
+## orderno:     order number (not unique as orders can have more than 1 line)
+## orderdate:   order purchase date, Dutch format
+## empno:       sales person number
+## name:        sales person name
+## custno:      customer number
+## city:        city of customer
+## regioncode:  region of customer
+## prodno:      identifying number of sold product
+## proddesc:    product description
+## catdesc:     product category
+## quantity     quantity product sold
+## linetotal    order line value
+##
+orderno;orderdate;empno;name;custno;city;regioncode;prodno;proddesc;catdesc;quantity;linetotal
+1001;06/01/2017;805;Harrie;15;Veghel;GVGH;408;Fruit Yogurt Mango;Dairy Products;9;146,25
+1004;14/01/2017;806;Karel;19;Veghel;GVGH;406;Foie Gras;Luxury Products;7;52,50
+1014;27/01/2017;806;Karel;19;Veghel;GVGH;401;Organic Soymilk Sweetened;Organic Products;22;473,00
+1014;27/01/2017;806;Karel;19;Veghel;GVGH;405;Sweetbread;Luxury Products;9;80,55
+1014;27/01/2017;806;Karel;19;Veghel;GVGH;409;Low-Fat Quark;Dairy Products;23;373,75
+1016;04/02/2017;805;Harrie;19;Veghel;GVGH;409;Low-Fat Quark;Dairy Products;6;97,50
+1017;04/02/2017;804;Bertha;14;Erp;GVGH;404;Organic Soymilk;Organic Products;18;207,00
+1017;04/02/2017;804;Bertha;14;Erp;GVGH;405;Sweetbread;Luxury Products;14;125,30
+1019;05/02/2017;805;Harrie;15;Veghel;GVGH;409;Low-Fat Quark;Dairy Products;10;162,50
+1023;10/02/2017;801;Herman;19;Veghel;GVGH;401;Organic Soymilk Sweetened;Organic Products;8;172,00
+1027;15/02/2017;806;Karel;14;Erp;GVGH;409;Low-Fat Quark;Dairy Products;21;341,25
+1031;27/02/2017;805;Harrie;15;Veghel;GVGH;401;Organic Soymilk Sweetened;Organic Products;11;236,50
+1031;27/02/2017;805;Harrie;15;Veghel;GVGH;404;Organic Soymilk;Organic Products;18;207,00
+1031;27/02/2017;805;Harrie;15;Veghel;GVGH;409;Low-Fat Quark;Dairy Products;21;341,25
+1035;06/03/2017;804;Bertha;15;Veghel;GVGH;410;Full Yogurt;Dairy Products;14;294,00
+1036;09/03/2017;804;Bertha;14;Erp;GVGH;402;Organic Soy Custard;Organic Products;16;623,20
+1037;09/03/2017;802;Klaas;15;Veghel;GVGH;410;Full Yogurt;Dairy Products;9;189,00
+1045;20/03/2017;801;Herman;14;Erp;GVGH;408;Fruit Yogurt Mango;Dairy Products;11;178,75
+1050;30/03/2017;801;Herman;15;Veghel;GVGH;402;Organic Soy Custard;Organic Products;16;623,20
+1053;06/04/2017;806;Karel;19;Veghel;GVGH;406;Foie Gras;Luxury Products;15;112,50
+1054;09/04/2017;802;Klaas;19;Veghel;GVGH;402;Organic Soy Custard;Organic Products;4;155,80
+1060;21/04/2017;802;Klaas;15;Veghel;GVGH;405;Sweetbread;Luxury Products;15;134,25
+1064;10/05/2017;806;Karel;14;Erp;GVGH;406;Foie Gras;Luxury Products;17;127,50
+1064;10/05/2017;806;Karel;14;Erp;GVGH;408;Fruit Yogurt Mango;Dairy Products;32;520,00
+1064;10/05/2017;806;Karel;14;Erp;GVGH;409;Low-Fat Quark;Dairy Products;13;211,25
+1076;13/06/2017;801;Herman;14;Erp;GVGH;408;Fruit Yogurt Mango;Dairy Products;12;195,00
+1077;13/06/2017;803;Gerda;15;Veghel;GVGH;411;Fruit Yogurt Strawberry;Dairy Products;15;299,25
+1079;17/06/2017;802;Klaas;19;Veghel;GVGH;406;Foie Gras;Luxury Products;11;82,50
+1080;22/06/2017;801;Herman;14;Erp;GVGH;405;Sweetbread;Luxury Products;22;196,90
+1081;22/06/2017;803;Gerda;14;Erp;GVGH;405;Sweetbread;Luxury Products;5;44,75
+1085;27/06/2017;804;Bertha;15;Veghel;GVGH;406;Foie Gras;Luxury Products;19;142,50
+1088;06/07/2017;803;Gerda;14;Erp;GVGH;403;Organic Soymilk Chocolat;Organic Products;12;195,00
+1091;14/07/2017;804;Bertha;14;Erp;GVGH;411;Fruit Yogurt Strawberry;Dairy Products;7;139,65
+1093;23/07/2017;806;Karel;19;Veghel;GVGH;402;Organic Soy Custard;Organic Products;15;584,25
+1103;17/08/2017;801;Herman;19;Veghel;GVGH;408;Fruit Yogurt Mango;Dairy Products;21;341,25
+1103;17/08/2017;801;Herman;19;Veghel;GVGH;410;Full Yogurt;Dairy Products;9;189,00
+1106;26/08/2017;802;Klaas;15;Veghel;GVGH;407;Caviar;Luxury Products;11;142,45
+1108;24/09/2017;804;Bertha;19;Veghel;GVGH;407;Caviar;Luxury Products;17;220,15
+1110;26/09/2017;802;Klaas;15;Veghel;GVGH;410;Full Yogurt;Dairy Products;13;273,00
+1113;04/10/2017;805;Harrie;19;Veghel;GVGH;403;Organic Soymilk Chocolat;Organic Products;13;211,25
+1126;23/10/2017;803;Gerda;14;Erp;GVGH;406;Foie Gras;Luxury Products;23;172,50
+1133;08/11/2017;806;Karel;19;Veghel;GVGH;404;Organic Soymilk;Organic Products;15;172,50
+1139;17/11/2017;803;Gerda;19;Veghel;GVGH;410;Full Yogurt;Dairy Products;22;462,00
+1141;19/11/2017;801;Herman;14;Erp;GVGH;403;Organic Soymilk Chocolat;Organic Products;21;341,25
+1143;24/11/2017;806;Karel;15;Veghel;GVGH;407;Caviar;Luxury Products;12;155,40
+1144;27/11/2017;802;Klaas;15;Veghel;GVGH;406;Foie Gras;Luxury Products;10;75,00
+1145;28/11/2017;802;Klaas;14;Erp;GVGH;405;Sweetbread;Luxury Products;13;116,35
+1146;30/11/2017;804;Bertha;14;Erp;GVGH;402;Organic Soy Custard;Organic Products;8;311,60
+1146;30/11/2017;804;Bertha;14;Erp;GVGH;403;Organic Soymilk Chocolat;Organic Products;14;227,50
+1146;30/11/2017;804;Bertha;14;Erp;GVGH;406;Foie Gras;Luxury Products;15;112,50
+1148;04/12/2017;801;Herman;19;Veghel;GVGH;405;Sweetbread;Luxury Products;2;17,90
+1150;08/12/2017;806;Karel;14;Erp;GVGH;403;Organic Soymilk Chocolat;Organic Products;6;97,50
+1151;09/12/2017;805;Harrie;19;Veghel;GVGH;402;Organic Soy Custard;Organic Products;12;467,40
+1155;17/12/2017;806;Karel;14;Erp;GVGH;406;Foie Gras;Luxury Products;7;52,50
+1157;18/12/2017;801;Herman;15;Veghel;GVGH;402;Organic Soy Custard;Organic Products;13;506,35
+1158;19/12/2017;803;Gerda;15;Veghel;GVGH;411;Fruit Yogurt Strawberry;Dairy Products;7;139,65
+1160;23/12/2017;804;Bertha;14;Erp;GVGH;410;Full Yogurt;Dairy Products;5;105,00
+1161;25/12/2017;803;Gerda;19;Veghel;GVGH;404;Organic Soymilk;Organic Products;18;207,00
+1166;06/01/2018;801;Herman;19;Veghel;GVGH;401;Organic Soymilk Sweetened;Organic Products;15;322,50
+1169;17/01/2018;802;Klaas;14;Erp;GVGH;411;Fruit Yogurt Strawberry;Dairy Products;2;39,90
+1170;20/01/2018;802;Klaas;19;Veghel;GVGH;404;Organic Soymilk;Organic Products;17;195,50
+1171;20/01/2018;804;Bertha;15;Veghel;GVGH;404;Organic Soymilk;Organic Products;18;207,00
+1173;21/01/2018;806;Karel;14;Erp;GVGH;406;Foie Gras;Luxury Products;11;82,50
+1175;28/01/2018;801;Herman;14;Erp;GVGH;406;Foie Gras;Luxury Products;18;135,00
+1176;28/01/2018;806;Karel;15;Veghel;GVGH;405;Sweetbread;Luxury Products;20;179,00
+1180;09/02/2018;806;Karel;14;Erp;GVGH;408;Fruit Yogurt Mango;Dairy Products;16;271,20
+1182;23/02/2018;801;Herman;14;Erp;GVGH;408;Fruit Yogurt Mango;Dairy Products;5;84,75
+1183;24/02/2018;801;Herman;14;Erp;GVGH;407;Caviar;Luxury Products;2;25,90
+1190;28/03/2018;801;Herman;15;Veghel;GVGH;408;Fruit Yogurt Mango;Dairy Products;6;101,70
+1193;31/03/2018;804;Bertha;15;Veghel;GVGH;401;Organic Soymilk Sweetened;Organic Products;23;494,50
+1198;18/04/2018;801;Herman;14;Erp;GVGH;401;Organic Soymilk Sweetened;Organic Products;8;172,00
+1198;18/04/2018;801;Herman;14;Erp;GVGH;404;Organic Soymilk;Organic Products;13;149,50
+1198;18/04/2018;801;Herman;14;Erp;GVGH;406;Foie Gras;Luxury Products;13;107,25
+1198;18/04/2018;801;Herman;14;Erp;GVGH;407;Caviar;Luxury Products;13;168,35
+1198;18/04/2018;801;Herman;14;Erp;GVGH;408;Fruit Yogurt Mango;Dairy Products;12;203,40
+1200;22/04/2018;805;Harrie;19;Veghel;GVGH;410;Full Yogurt;Dairy Products;8;180,00
+1203;28/04/2018;805;Harrie;14;Erp;GVGH;410;Full Yogurt;Dairy Products;19;427,50
+1206;06/05/2018;804;Bertha;19;Veghel;GVGH;407;Caviar;Luxury Products;9;116,55
+1207;14/05/2018;804;Bertha;19;Veghel;GVGH;402;Organic Soy Custard;Organic Products;22;878,90
+1209;19/05/2018;805;Harrie;19;Veghel;GVGH;406;Foie Gras;Luxury Products;28;231,00
+1210;21/05/2018;806;Karel;19;Veghel;GVGH;408;Fruit Yogurt Mango;Dairy Products;9;152,55
+1211;23/05/2018;804;Bertha;19;Veghel;GVGH;411;Fruit Yogurt Strawberry;Dairy Products;8;159,60
+1212;30/05/2018;802;Klaas;14;Erp;GVGH;406;Foie Gras;Luxury Products;8;66,00
+1217;12/06/2018;801;Herman;15;Veghel;GVGH;410;Full Yogurt;Dairy Products;18;405,00
+1219;16/06/2018;805;Harrie;19;Veghel;GVGH;407;Caviar;Luxury Products;24;310,80
+1221;22/06/2018;806;Karel;14;Erp;GVGH;411;Fruit Yogurt Strawberry;Dairy Products;10;199,50
+1223;25/06/2018;803;Gerda;19;Veghel;GVGH;401;Organic Soymilk Sweetened;Organic Products;18;387,00
+1229;06/07/2018;803;Gerda;14;Erp;GVGH;403;Organic Soymilk Chocolat;Organic Products;12;195,00
+1229;06/07/2018;803;Gerda;14;Erp;GVGH;407;Caviar;Luxury Products;5;64,75
+1231;09/07/2018;802;Klaas;19;Veghel;GVGH;406;Foie Gras;Luxury Products;15;123,75
+1234;13/07/2018;806;Karel;19;Veghel;GVGH;405;Sweetbread;Luxury Products;10;89,50
+1236;13/07/2018;804;Bertha;15;Veghel;GVGH;404;Organic Soymilk;Organic Products;8;92,00
+1242;30/07/2018;805;Harrie;15;Veghel;GVGH;409;Low-Fat Quark;Dairy Products;9;146,25
+1250;14/08/2018;806;Karel;15;Veghel;GVGH;403;Organic Soymilk Chocolat;Organic Products;24;462,00
+1251;16/08/2018;806;Karel;19;Veghel;GVGH;401;Organic Soymilk Sweetened;Organic Products;6;129,00
+1251;16/08/2018;806;Karel;19;Veghel;GVGH;407;Caviar;Luxury Products;23;297,85
+1252;25/08/2018;806;Karel;15;Veghel;GVGH;402;Organic Soy Custard;Organic Products;2;79,90
+1252;25/08/2018;806;Karel;15;Veghel;GVGH;404;Organic Soymilk;Organic Products;15;172,50
+1255;31/08/2018;806;Karel;19;Veghel;GVGH;401;Organic Soymilk Sweetened;Organic Products;18;387,00
+1256;03/09/2018;801;Herman;19;Veghel;GVGH;401;Organic Soymilk Sweetened;Organic Products;16;344,00
+1259;16/09/2018;801;Herman;14;Erp;GVGH;409;Low-Fat Quark;Dairy Products;15;243,75
+1261;18/09/2018;805;Harrie;19;Veghel;GVGH;407;Caviar;Luxury Products;9;116,55
+1262;19/09/2018;806;Karel;14;Erp;GVGH;405;Sweetbread;Luxury Products;5;44,75
+1275;07/10/2018;802;Klaas;19;Veghel;GVGH;410;Full Yogurt;Dairy Products;17;382,50
+1281;22/10/2018;802;Klaas;15;Veghel;GVGH;403;Organic Soymilk Chocolat;Organic Products;12;231,00
+1288;06/11/2018;803;Gerda;19;Veghel;GVGH;402;Organic Soy Custard;Organic Products;7;259,00
+1288;06/11/2018;803;Gerda;19;Veghel;GVGH;403;Organic Soymilk Chocolat;Organic Products;11;211,75
+1290;15/11/2018;806;Karel;14;Erp;GVGH;403;Organic Soymilk Chocolat;Organic Products;9;173,25
+1291;16/11/2018;803;Gerda;19;Veghel;GVGH;411;Fruit Yogurt Strawberry;Dairy Products;20;399,00
+1294;19/11/2018;803;Gerda;14;Erp;GVGH;411;Fruit Yogurt Strawberry;Dairy Products;21;418,95
+1295;19/11/2018;805;Harrie;19;Veghel;GVGH;409;Low-Fat Quark;Dairy Products;8;130,00
+1297;26/11/2018;806;Karel;14;Erp;GVGH;405;Sweetbread;Luxury Products;19;170,05
+1302;07/12/2018;806;Karel;15;Veghel;GVGH;401;Organic Soymilk Sweetened;Organic Products;16;344,00
+1303;11/12/2018;805;Harrie;19;Veghel;GVGH;402;Organic Soy Custard;Organic Products;13;481,00
+1307;18/12/2018;801;Herman;15;Veghel;GVGH;409;Low-Fat Quark;Dairy Products;9;146,25
+1309;24/12/2018;806;Karel;15;Veghel;GVGH;403;Organic Soymilk Chocolat;Organic Products;15;288,75
+1309;24/12/2018;806;Karel;15;Veghel;GVGH;406;Foie Gras;Luxury Products;10;82,50
+1311;28/12/2018;803;Gerda;15;Veghel;GVGH;405;Sweetbread;Luxury Products;21;187,95
+1318;25/01/2019;802;Klaas;19;Veghel;GVGH;408;Fruit Yogurt Mango;Dairy Products;13;227,50
+1319;02/02/2019;806;Karel;15;Veghel;GVGH;401;Organic Soymilk Sweetened;Organic Products;8;172,00
+1325;11/02/2019;806;Karel;14;Erp;GVGH;407;Caviar;Luxury Products;18;233,10
+1326;19/02/2019;803;Gerda;14;Erp;GVGH;405;Sweetbread;Luxury Products;21;187,95
+1329;28/02/2019;806;Karel;15;Veghel;GVGH;408;Fruit Yogurt Mango;Dairy Products;5;87,50
+1340;05/04/2019;803;Gerda;15;Veghel;GVGH;410;Full Yogurt;Dairy Products;9;202,50
+1344;17/04/2019;805;Harrie;19;Veghel;GVGH;401;Organic Soymilk Sweetened;Organic Products;11;236,50
+1345;21/04/2019;805;Harrie;19;Veghel;GVGH;407;Caviar;Luxury Products;15;194,25
+1346;26/04/2019;805;Harrie;14;Erp;GVGH;401;Organic Soymilk Sweetened;Organic Products;9;193,50
+1351;18/05/2019;805;Harrie;14;Erp;GVGH;409;Low-Fat Quark;Dairy Products;24;390,00
+1355;30/05/2019;804;Bertha;15;Veghel;GVGH;411;Fruit Yogurt Strawberry;Dairy Products;17;373,15
+1358;07/06/2019;802;Klaas;19;Veghel;GVGH;409;Low-Fat Quark;Dairy Products;21;341,25
+1359;08/06/2019;801;Herman;19;Veghel;GVGH;401;Organic Soymilk Sweetened;Organic Products;6;129,00
+1359;08/06/2019;801;Herman;19;Veghel;GVGH;406;Foie Gras;Luxury Products;10;82,50
+1359;08/06/2019;801;Herman;19;Veghel;GVGH;409;Low-Fat Quark;Dairy Products;17;276,25
+1359;08/06/2019;801;Herman;19;Veghel;GVGH;410;Full Yogurt;Dairy Products;17;382,50
+1361;21/06/2019;802;Klaas;19;Veghel;GVGH;410;Full Yogurt;Dairy Products;10;225,00
+1362;29/06/2019;803;Gerda;15;Veghel;GVGH;405;Sweetbread;Luxury Products;5;44,75
+1366;10/07/2019;805;Harrie;19;Veghel;GVGH;411;Fruit Yogurt Strawberry;Dairy Products;8;175,60
+1368;11/07/2019;802;Klaas;14;Erp;GVGH;405;Sweetbread;Luxury Products;2;17,90
+1368;11/07/2019;802;Klaas;14;Erp;GVGH;407;Caviar;Luxury Products;6;77,70
+1368;11/07/2019;802;Klaas;14;Erp;GVGH;410;Full Yogurt;Dairy Products;9;202,50
+1368;11/07/2019;802;Klaas;14;Erp;GVGH;411;Fruit Yogurt Strawberry;Dairy Products;8;175,60
+1369;12/07/2019;804;Bertha;14;Erp;GVGH;402;Organic Soy Custard;Organic Products;24;888,00
+1373;19/07/2019;801;Herman;15;Veghel;GVGH;404;Organic Soymilk;Organic Products;11;137,50
+1373;19/07/2019;801;Herman;15;Veghel;GVGH;408;Fruit Yogurt Mango;Dairy Products;19;332,50
+1380;28/07/2019;803;Gerda;14;Erp;GVGH;406;Foie Gras;Luxury Products;17;140,25
+1382;31/07/2019;804;Bertha;14;Erp;GVGH;407;Caviar;Luxury Products;9;116,55
+1385;06/08/2019;802;Klaas;15;Veghel;GVGH;401;Organic Soymilk Sweetened;Organic Products;5;107,50
+1389;10/08/2019;804;Bertha;15;Veghel;GVGH;406;Foie Gras;Luxury Products;5;41,25
+1389;10/08/2019;804;Bertha;15;Veghel;GVGH;407;Caviar;Luxury Products;15;194,25
+1389;10/08/2019;804;Bertha;15;Veghel;GVGH;408;Fruit Yogurt Mango;Dairy Products;9;157,50
+1391;17/08/2019;802;Klaas;19;Veghel;GVGH;407;Caviar;Luxury Products;19;246,05
+1398;29/08/2019;805;Harrie;15;Veghel;GVGH;406;Foie Gras;Luxury Products;11;90,75
+1399;30/08/2019;806;Karel;14;Erp;GVGH;402;Organic Soy Custard;Organic Products;12;444,00
+1399;30/08/2019;806;Karel;14;Erp;GVGH;403;Organic Soymilk Chocolat;Organic Products;21;320,25
+1406;06/09/2019;806;Karel;14;Erp;GVGH;401;Organic Soymilk Sweetened;Organic Products;17;365,50
+1410;13/09/2019;806;Karel;15;Veghel;GVGH;403;Organic Soymilk Chocolat;Organic Products;6;91,50
+1410;13/09/2019;806;Karel;15;Veghel;GVGH;407;Caviar;Luxury Products;21;271,95
+1413;19/09/2019;804;Bertha;14;Erp;GVGH;404;Organic Soymilk;Organic Products;7;87,50
+1416;12/10/2019;803;Gerda;15;Veghel;GVGH;408;Fruit Yogurt Mango;Dairy Products;20;350,00
+1417;16/10/2019;803;Gerda;19;Veghel;GVGH;403;Organic Soymilk Chocolat;Organic Products;11;167,75
+1418;21/10/2019;801;Herman;15;Veghel;GVGH;401;Organic Soymilk Sweetened;Organic Products;19;408,50
+1421;29/10/2019;803;Gerda;15;Veghel;GVGH;402;Organic Soy Custard;Organic Products;16;592,00
+1421;29/10/2019;803;Gerda;15;Veghel;GVGH;406;Foie Gras;Luxury Products;14;115,50
+1421;29/10/2019;803;Gerda;15;Veghel;GVGH;410;Full Yogurt;Dairy Products;20;450,00
+1421;29/10/2019;803;Gerda;15;Veghel;GVGH;411;Fruit Yogurt Strawberry;Dairy Products;9;197,55
+1422;01/11/2019;802;Klaas;14;Erp;GVGH;410;Full Yogurt;Dairy Products;10;225,00
+1423;04/11/2019;806;Karel;14;Erp;GVGH;402;Organic Soy Custard;Organic Products;19;703,00
+1423;04/11/2019;806;Karel;14;Erp;GVGH;407;Caviar;Luxury Products;3;38,85
+1423;04/11/2019;806;Karel;14;Erp;GVGH;409;Low-Fat Quark;Dairy Products;10;162,50
+1424;21/11/2019;806;Karel;19;Veghel;GVGH;409;Low-Fat Quark;Dairy Products;12;195,00
+1428;07/12/2019;804;Bertha;14;Erp;GVGH;408;Fruit Yogurt Mango;Dairy Products;19;332,50
+1435;17/12/2019;803;Gerda;15;Veghel;GVGH;411;Fruit Yogurt Strawberry;Dairy Products;6;131,70
+1439;26/12/2019;804;Bertha;15;Veghel;GVGH;407;Caviar;Luxury Products;11;142,45
+1002;07/01/2017;805;Harrie;16;Eindhoven;REHV;407;Caviar;Luxury Products;6;77,70
+1002;07/01/2017;805;Harrie;16;Eindhoven;REHV;410;Full Yogurt;Dairy Products;15;315,00
+1006;20/01/2017;801;Herman;11;Eindhoven;REHV;411;Fruit Yogurt Strawberry;Dairy Products;21;418,95
+1008;21/01/2017;801;Herman;16;Eindhoven;REHV;410;Full Yogurt;Dairy Products;8;168,00
+1009;22/01/2017;803;Gerda;16;Eindhoven;REHV;401;Organic Soymilk Sweetened;Organic Products;5;107,50
+1009;22/01/2017;803;Gerda;16;Eindhoven;REHV;402;Organic Soy Custard;Organic Products;20;779,00
+1009;22/01/2017;803;Gerda;16;Eindhoven;REHV;408;Fruit Yogurt Mango;Dairy Products;6;97,50
+1010;22/01/2017;804;Bertha;12;Eindhoven;REHV;410;Full Yogurt;Dairy Products;18;378,00
+1011;23/01/2017;803;Gerda;12;Eindhoven;REHV;403;Organic Soymilk Chocolat;Organic Products;14;227,50
+1015;28/01/2017;803;Gerda;11;Eindhoven;REHV;410;Full Yogurt;Dairy Products;9;189,00
+1018;05/02/2017;801;Herman;11;Eindhoven;REHV;401;Organic Soymilk Sweetened;Organic Products;21;451,50
+1020;06/02/2017;802;Klaas;16;Eindhoven;REHV;409;Low-Fat Quark;Dairy Products;11;178,75
+1020;06/02/2017;802;Klaas;16;Eindhoven;REHV;411;Fruit Yogurt Strawberry;Dairy Products;20;399,00
+1021;06/02/2017;805;Harrie;11;Eindhoven;REHV;408;Fruit Yogurt Mango;Dairy Products;7;113,75
+1024;11/02/2017;802;Klaas;11;Eindhoven;REHV;410;Full Yogurt;Dairy Products;17;357,00
+1025;12/02/2017;804;Bertha;11;Eindhoven;REHV;410;Full Yogurt;Dairy Products;5;105,00
+1028;17/02/2017;804;Bertha;16;Eindhoven;REHV;405;Sweetbread;Luxury Products;11;98,45
+1032;03/03/2017;803;Gerda;11;Eindhoven;REHV;405;Sweetbread;Luxury Products;7;62,65
+1032;03/03/2017;803;Gerda;11;Eindhoven;REHV;411;Fruit Yogurt Strawberry;Dairy Products;16;319,20
+1033;04/03/2017;802;Klaas;12;Eindhoven;REHV;406;Foie Gras;Luxury Products;6;45,00
+1034;05/03/2017;806;Karel;11;Eindhoven;REHV;406;Foie Gras;Luxury Products;8;60,00
+1038;11/03/2017;803;Gerda;12;Eindhoven;REHV;404;Organic Soymilk;Organic Products;24;276,00
+1039;14/03/2017;803;Gerda;11;Eindhoven;REHV;402;Organic Soy Custard;Organic Products;21;817,95
+1039;14/03/2017;803;Gerda;11;Eindhoven;REHV;407;Caviar;Luxury Products;9;116,55
+1039;14/03/2017;803;Gerda;11;Eindhoven;REHV;409;Low-Fat Quark;Dairy Products;8;130,00
+1039;14/03/2017;803;Gerda;11;Eindhoven;REHV;411;Fruit Yogurt Strawberry;Dairy Products;24;478,80
+1040;15/03/2017;804;Bertha;20;Waalre;REHV;410;Full Yogurt;Dairy Products;5;105,00
+1043;18/03/2017;803;Gerda;16;Eindhoven;REHV;411;Fruit Yogurt Strawberry;Dairy Products;6;119,70
+1046;23/03/2017;802;Klaas;16;Eindhoven;REHV;401;Organic Soymilk Sweetened;Organic Products;23;494,50
+1046;23/03/2017;802;Klaas;16;Eindhoven;REHV;405;Sweetbread;Luxury Products;24;214,80
+1048;27/03/2017;801;Herman;16;Eindhoven;REHV;407;Caviar;Luxury Products;12;155,40
+1049;28/03/2017;806;Karel;11;Eindhoven;REHV;402;Organic Soy Custard;Organic Products;7;272,65
+1051;31/03/2017;802;Klaas;12;Eindhoven;REHV;406;Foie Gras;Luxury Products;20;150,00
+1056;13/04/2017;803;Gerda;20;Waalre;REHV;406;Foie Gras;Luxury Products;6;45,00
+1056;13/04/2017;803;Gerda;20;Waalre;REHV;411;Fruit Yogurt Strawberry;Dairy Products;11;219,45
+1058;18/04/2017;805;Harrie;12;Eindhoven;REHV;411;Fruit Yogurt Strawberry;Dairy Products;14;279,30
+1059;21/04/2017;801;Herman;20;Waalre;REHV;408;Fruit Yogurt Mango;Dairy Products;23;373,75
+1061;28/04/2017;801;Herman;12;Eindhoven;REHV;406;Foie Gras;Luxury Products;10;75,00
+1063;09/05/2017;806;Karel;11;Eindhoven;REHV;407;Caviar;Luxury Products;23;297,85
+1065;17/05/2017;804;Bertha;11;Eindhoven;REHV;404;Organic Soymilk;Organic Products;12;138,00
+1067;21/05/2017;803;Gerda;16;Eindhoven;REHV;401;Organic Soymilk Sweetened;Organic Products;6;129,00
+1068;23/05/2017;804;Bertha;12;Eindhoven;REHV;401;Organic Soymilk Sweetened;Organic Products;22;473,00
+1069;28/05/2017;803;Gerda;12;Eindhoven;REHV;410;Full Yogurt;Dairy Products;18;378,00
+1072;05/06/2017;804;Bertha;12;Eindhoven;REHV;406;Foie Gras;Luxury Products;10;75,00
+1075;12/06/2017;803;Gerda;20;Waalre;REHV;409;Low-Fat Quark;Dairy Products;7;113,75
+1078;15/06/2017;803;Gerda;20;Waalre;REHV;403;Organic Soymilk Chocolat;Organic Products;15;243,75
+1082;22/06/2017;802;Klaas;20;Waalre;REHV;409;Low-Fat Quark;Dairy Products;12;195,00
+1083;23/06/2017;802;Klaas;20;Waalre;REHV;401;Organic Soymilk Sweetened;Organic Products;7;150,50
+1083;23/06/2017;802;Klaas;20;Waalre;REHV;402;Organic Soy Custard;Organic Products;6;233,70
+1083;23/06/2017;802;Klaas;20;Waalre;REHV;404;Organic Soymilk;Organic Products;23;264,50
+1086;01/07/2017;803;Gerda;16;Eindhoven;REHV;411;Fruit Yogurt Strawberry;Dairy Products;6;119,70
+1087;04/07/2017;802;Klaas;16;Eindhoven;REHV;404;Organic Soymilk;Organic Products;21;241,50
+1089;12/07/2017;802;Klaas;16;Eindhoven;REHV;403;Organic Soymilk Chocolat;Organic Products;11;178,75
+1090;12/07/2017;803;Gerda;20;Waalre;REHV;407;Caviar;Luxury Products;22;284,90
+1092;21/07/2017;804;Bertha;16;Eindhoven;REHV;410;Full Yogurt;Dairy Products;7;147,00
+1094;26/07/2017;805;Harrie;16;Eindhoven;REHV;405;Sweetbread;Luxury Products;21;187,95
+1095;26/07/2017;803;Gerda;16;Eindhoven;REHV;409;Low-Fat Quark;Dairy Products;5;81,25
+1096;26/07/2017;803;Gerda;11;Eindhoven;REHV;404;Organic Soymilk;Organic Products;24;276,00
+1098;03/08/2017;806;Karel;11;Eindhoven;REHV;404;Organic Soymilk;Organic Products;19;218,50
+1099;04/08/2017;805;Harrie;20;Waalre;REHV;401;Organic Soymilk Sweetened;Organic Products;23;494,50
+1099;04/08/2017;805;Harrie;20;Waalre;REHV;406;Foie Gras;Luxury Products;9;67,50
+1099;04/08/2017;805;Harrie;20;Waalre;REHV;411;Fruit Yogurt Strawberry;Dairy Products;21;418,95
+1100;06/08/2017;803;Gerda;12;Eindhoven;REHV;405;Sweetbread;Luxury Products;13;116,35
+1104;18/08/2017;802;Klaas;20;Waalre;REHV;406;Foie Gras;Luxury Products;11;82,50
+1105;20/08/2017;801;Herman;11;Eindhoven;REHV;410;Full Yogurt;Dairy Products;20;420,00
+1109;24/09/2017;803;Gerda;16;Eindhoven;REHV;402;Organic Soy Custard;Organic Products;9;350,55
+1109;24/09/2017;803;Gerda;16;Eindhoven;REHV;404;Organic Soymilk;Organic Products;17;195,50
+1109;24/09/2017;803;Gerda;16;Eindhoven;REHV;406;Foie Gras;Luxury Products;22;165,00
+1112;01/10/2017;806;Karel;16;Eindhoven;REHV;408;Fruit Yogurt Mango;Dairy Products;14;227,50
+1118;09/10/2017;805;Harrie;12;Eindhoven;REHV;410;Full Yogurt;Dairy Products;19;399,00
+1124;21/10/2017;802;Klaas;11;Eindhoven;REHV;409;Low-Fat Quark;Dairy Products;23;373,75
+1127;23/10/2017;804;Bertha;11;Eindhoven;REHV;402;Organic Soy Custard;Organic Products;19;740,05
+1128;27/10/2017;803;Gerda;12;Eindhoven;REHV;410;Full Yogurt;Dairy Products;23;483,00
+1129;31/10/2017;804;Bertha;20;Waalre;REHV;405;Sweetbread;Luxury Products;10;89,50
+1131;02/11/2017;801;Herman;12;Eindhoven;REHV;409;Low-Fat Quark;Dairy Products;5;81,25
+1132;08/11/2017;801;Herman;20;Waalre;REHV;411;Fruit Yogurt Strawberry;Dairy Products;22;438,90
+1135;11/11/2017;806;Karel;20;Waalre;REHV;404;Organic Soymilk;Organic Products;23;264,50
+1137;14/11/2017;802;Klaas;16;Eindhoven;REHV;402;Organic Soy Custard;Organic Products;6;233,70
+1142;24/11/2017;802;Klaas;11;Eindhoven;REHV;403;Organic Soymilk Chocolat;Organic Products;6;97,50
+1152;15/12/2017;803;Gerda;11;Eindhoven;REHV;404;Organic Soymilk;Organic Products;6;69,00
+1162;31/12/2017;805;Harrie;16;Eindhoven;REHV;401;Organic Soymilk Sweetened;Organic Products;17;365,50
+1163;03/01/2018;801;Herman;12;Eindhoven;REHV;411;Fruit Yogurt Strawberry;Dairy Products;23;458,85
+1164;04/01/2018;805;Harrie;20;Waalre;REHV;411;Fruit Yogurt Strawberry;Dairy Products;21;418,95
+1165;04/01/2018;801;Herman;11;Eindhoven;REHV;408;Fruit Yogurt Mango;Dairy Products;18;305,10
+1167;08/01/2018;805;Harrie;16;Eindhoven;REHV;410;Full Yogurt;Dairy Products;18;378,00
+1174;22/01/2018;804;Bertha;12;Eindhoven;REHV;406;Foie Gras;Luxury Products;12;90,00
+1177;02/02/2018;805;Harrie;12;Eindhoven;REHV;405;Sweetbread;Luxury Products;24;214,80
+1177;02/02/2018;805;Harrie;12;Eindhoven;REHV;408;Fruit Yogurt Mango;Dairy Products;9;152,55
+1177;02/02/2018;805;Harrie;12;Eindhoven;REHV;410;Full Yogurt;Dairy Products;7;147,00
+1177;02/02/2018;805;Harrie;12;Eindhoven;REHV;411;Fruit Yogurt Strawberry;Dairy Products;16;319,20
+1178;04/02/2018;803;Gerda;11;Eindhoven;REHV;405;Sweetbread;Luxury Products;7;62,65
+1179;07/02/2018;803;Gerda;12;Eindhoven;REHV;401;Organic Soymilk Sweetened;Organic Products;7;150,50
+1184;24/02/2018;805;Harrie;11;Eindhoven;REHV;410;Full Yogurt;Dairy Products;14;294,00
+1186;27/02/2018;803;Gerda;20;Waalre;REHV;408;Fruit Yogurt Mango;Dairy Products;15;254,25
+1187;19/03/2018;802;Klaas;11;Eindhoven;REHV;410;Full Yogurt;Dairy Products;7;147,00
+1187;19/03/2018;802;Klaas;11;Eindhoven;REHV;410;Full Yogurt;Dairy Products;7;147,50
+1188;20/03/2018;804;Bertha;16;Eindhoven;REHV;405;Sweetbread;Luxury Products;7;62,65
+1192;29/03/2018;801;Herman;12;Eindhoven;REHV;401;Organic Soymilk Sweetened;Organic Products;9;193,50
+1194;01/04/2018;804;Bertha;11;Eindhoven;REHV;404;Organic Soymilk;Organic Products;20;230,00
+1197;18/04/2018;805;Harrie;16;Eindhoven;REHV;402;Organic Soy Custard;Organic Products;5;199,75
+1201;23/04/2018;803;Gerda;12;Eindhoven;REHV;405;Sweetbread;Luxury Products;20;179,00
+1201;23/04/2018;803;Gerda;12;Eindhoven;REHV;411;Fruit Yogurt Strawberry;Dairy Products;15;299,25
+1202;27/04/2018;804;Bertha;20;Waalre;REHV;402;Organic Soy Custard;Organic Products;9;359,55
+1205;05/05/2018;801;Herman;20;Waalre;REHV;402;Organic Soy Custard;Organic Products;21;838,95
+1208;15/05/2018;802;Klaas;16;Eindhoven;REHV;409;Low-Fat Quark;Dairy Products;14;227,50
+1213;31/05/2018;806;Karel;12;Eindhoven;REHV;404;Organic Soymilk;Organic Products;19;218,50
+1215;06/06/2018;805;Harrie;11;Eindhoven;REHV;406;Foie Gras;Luxury Products;10;82,50
+1218;16/06/2018;806;Karel;12;Eindhoven;REHV;407;Caviar;Luxury Products;24;310,80
+1220;21/06/2018;801;Herman;16;Eindhoven;REHV;407;Caviar;Luxury Products;21;271,95
+1226;26/06/2018;805;Harrie;12;Eindhoven;REHV;407;Caviar;Luxury Products;12;155,40
+1230;07/07/2018;804;Bertha;12;Eindhoven;REHV;404;Organic Soymilk;Organic Products;8;92,00
+1232;11/07/2018;802;Klaas;12;Eindhoven;REHV;411;Fruit Yogurt Strawberry;Dairy Products;23;458,85
+1235;13/07/2018;802;Klaas;11;Eindhoven;REHV;401;Organic Soymilk Sweetened;Organic Products;22;473,00
+1237;16/07/2018;803;Gerda;11;Eindhoven;REHV;401;Organic Soymilk Sweetened;Organic Products;23;494,50
+1240;24/07/2018;803;Gerda;16;Eindhoven;REHV;403;Organic Soymilk Chocolat;Organic Products;2;32,50
+1241;25/07/2018;801;Herman;16;Eindhoven;REHV;408;Fruit Yogurt Mango;Dairy Products;2;35,00
+1243;03/08/2018;804;Bertha;20;Waalre;REHV;401;Organic Soymilk Sweetened;Organic Products;21;451,50
+1244;05/08/2018;802;Klaas;20;Waalre;REHV;410;Full Yogurt;Dairy Products;23;517,50
+1247;08/08/2018;802;Klaas;11;Eindhoven;REHV;406;Foie Gras;Luxury Products;8;66,00
+1248;08/08/2018;803;Gerda;20;Waalre;REHV;402;Organic Soy Custard;Organic Products;10;399,50
+1257;05/09/2018;804;Bertha;12;Eindhoven;REHV;405;Sweetbread;Luxury Products;13;116,35
+1260;16/09/2018;802;Klaas;20;Waalre;REHV;411;Fruit Yogurt Strawberry;Dairy Products;24;478,80
+1263;19/09/2018;804;Bertha;12;Eindhoven;REHV;403;Organic Soymilk Chocolat;Organic Products;14;269,50
+1264;20/09/2018;801;Herman;11;Eindhoven;REHV;411;Fruit Yogurt Strawberry;Dairy Products;20;399,00
+1265;20/09/2018;803;Gerda;12;Eindhoven;REHV;411;Fruit Yogurt Strawberry;Dairy Products;13;259,35
+1267;21/09/2018;802;Klaas;11;Eindhoven;REHV;411;Fruit Yogurt Strawberry;Dairy Products;9;179,55
+1268;22/09/2018;804;Bertha;20;Waalre;REHV;405;Sweetbread;Luxury Products;9;80,55
+1270;29/09/2018;801;Herman;20;Waalre;REHV;405;Sweetbread;Luxury Products;9;80,55
+1270;29/09/2018;801;Herman;20;Waalre;REHV;406;Foie Gras;Luxury Products;20;165,00
+1270;29/09/2018;801;Herman;20;Waalre;REHV;409;Low-Fat Quark;Dairy Products;15;243,75
+1270;29/09/2018;801;Herman;20;Waalre;REHV;410;Full Yogurt;Dairy Products;17;382,50
+1271;29/09/2018;805;Harrie;16;Eindhoven;REHV;410;Full Yogurt;Dairy Products;5;112,50
+1276;08/10/2018;802;Klaas;11;Eindhoven;REHV;411;Fruit Yogurt Strawberry;Dairy Products;16;319,20
+1277;12/10/2018;802;Klaas;11;Eindhoven;REHV;407;Caviar;Luxury Products;17;220,15
+1278;13/10/2018;801;Herman;16;Eindhoven;REHV;408;Fruit Yogurt Mango;Dairy Products;23;402,50
+1280;21/10/2018;804;Bertha;12;Eindhoven;REHV;404;Organic Soymilk;Organic Products;12;138,00
+1284;01/11/2018;805;Harrie;12;Eindhoven;REHV;411;Fruit Yogurt Strawberry;Dairy Products;23;458,85
+1285;01/11/2018;805;Harrie;11;Eindhoven;REHV;401;Organic Soymilk Sweetened;Organic Products;18;387,00
+1287;06/11/2018;806;Karel;16;Eindhoven;REHV;406;Foie Gras;Luxury Products;14;115,50
+1289;12/11/2018;801;Herman;12;Eindhoven;REHV;407;Caviar;Luxury Products;23;297,85
+1292;17/11/2018;805;Harrie;20;Waalre;REHV;403;Organic Soymilk Chocolat;Organic Products;10;192,50
+1293;19/11/2018;802;Klaas;16;Eindhoven;REHV;403;Organic Soymilk Chocolat;Organic Products;9;173,25
+1299;30/11/2018;804;Bertha;12;Eindhoven;REHV;411;Fruit Yogurt Strawberry;Dairy Products;28;558,60
+1304;12/12/2018;802;Klaas;12;Eindhoven;REHV;410;Full Yogurt;Dairy Products;16;360,00
+1308;18/12/2018;803;Gerda;12;Eindhoven;REHV;405;Sweetbread;Luxury Products;22;196,90
+1310;26/12/2018;802;Klaas;12;Eindhoven;REHV;404;Organic Soymilk;Organic Products;8;92,00
+1310;26/12/2018;802;Klaas;12;Eindhoven;REHV;408;Fruit Yogurt Mango;Dairy Products;6;105,00
+1310;26/12/2018;802;Klaas;12;Eindhoven;REHV;409;Low-Fat Quark;Dairy Products;6;97,50
+1314;11/01/2019;802;Klaas;16;Eindhoven;REHV;404;Organic Soymilk;Organic Products;13;149,50
+1315;12/01/2019;803;Gerda;11;Eindhoven;REHV;409;Low-Fat Quark;Dairy Products;12;195,00
+1316;12/01/2019;802;Klaas;11;Eindhoven;REHV;410;Full Yogurt;Dairy Products;20;450,00
+1320;03/02/2019;802;Klaas;12;Eindhoven;REHV;406;Foie Gras;Luxury Products;3;24,75
+1324;11/02/2019;802;Klaas;20;Waalre;REHV;404;Organic Soymilk;Organic Products;14;161,00
+1327;23/02/2019;804;Bertha;11;Eindhoven;REHV;407;Caviar;Luxury Products;7;90,65
+1328;27/02/2019;803;Gerda;20;Waalre;REHV;404;Organic Soymilk;Organic Products;17;195,50
+1332;15/03/2019;801;Herman;11;Eindhoven;REHV;405;Sweetbread;Luxury Products;20;179,00
+1334;15/03/2019;803;Gerda;11;Eindhoven;REHV;411;Fruit Yogurt Strawberry;Dairy Products;16;319,20
+1336;23/03/2019;805;Harrie;16;Eindhoven;REHV;408;Fruit Yogurt Mango;Dairy Products;9;157,50
+1338;02/04/2019;805;Harrie;12;Eindhoven;REHV;408;Fruit Yogurt Mango;Dairy Products;20;350,00
+1347;26/04/2019;801;Herman;16;Eindhoven;REHV;406;Foie Gras;Luxury Products;11;90,75
+1348;01/05/2019;805;Harrie;16;Eindhoven;REHV;407;Caviar;Luxury Products;20;259,00
+1349;08/05/2019;801;Herman;12;Eindhoven;REHV;409;Low-Fat Quark;Dairy Products;17;276,25
+1349;08/05/2019;801;Herman;12;Eindhoven;REHV;411;Fruit Yogurt Strawberry;Dairy Products;20;439,00
+1350;09/05/2019;806;Karel;16;Eindhoven;REHV;403;Organic Soymilk Chocolat;Organic Products;15;228,75
+1352;23/05/2019;805;Harrie;12;Eindhoven;REHV;406;Foie Gras;Luxury Products;8;66,00
+1353;28/05/2019;802;Klaas;16;Eindhoven;REHV;404;Organic Soymilk;Organic Products;12;150,00
+1354;30/05/2019;804;Bertha;20;Waalre;REHV;401;Organic Soymilk Sweetened;Organic Products;15;322,50
+1371;14/07/2019;801;Herman;11;Eindhoven;REHV;403;Organic Soymilk Chocolat;Organic Products;22;335,50
+1376;25/07/2019;803;Gerda;12;Eindhoven;REHV;404;Organic Soymilk;Organic Products;12;150,00
+1377;25/07/2019;805;Harrie;16;Eindhoven;REHV;407;Caviar;Luxury Products;5;64,75
+1377;25/07/2019;805;Harrie;16;Eindhoven;REHV;408;Fruit Yogurt Mango;Dairy Products;15;262,50
+1378;26/07/2019;802;Klaas;11;Eindhoven;REHV;410;Full Yogurt;Dairy Products;10;225,00
+1379;28/07/2019;806;Karel;12;Eindhoven;REHV;404;Organic Soymilk;Organic Products;14;175,00
+1383;02/08/2019;801;Herman;16;Eindhoven;REHV;402;Organic Soy Custard;Organic Products;23;851,00
+1384;02/08/2019;803;Gerda;11;Eindhoven;REHV;404;Organic Soymilk;Organic Products;15;187,50
+1386;08/08/2019;803;Gerda;16;Eindhoven;REHV;411;Fruit Yogurt Strawberry;Dairy Products;19;417,05
+1387;08/08/2019;802;Klaas;12;Eindhoven;REHV;404;Organic Soymilk;Organic Products;12;150,00
+1388;10/08/2019;802;Klaas;11;Eindhoven;REHV;405;Sweetbread;Luxury Products;17;152,15
+1392;17/08/2019;803;Gerda;20;Waalre;REHV;409;Low-Fat Quark;Dairy Products;10;162,50
+1395;25/08/2019;806;Karel;16;Eindhoven;REHV;408;Fruit Yogurt Mango;Dairy Products;16;280,00
+1397;28/08/2019;806;Karel;12;Eindhoven;REHV;411;Fruit Yogurt Strawberry;Dairy Products;5;109,75
+1401;02/09/2019;806;Karel;11;Eindhoven;REHV;405;Sweetbread;Luxury Products;13;116,35
+1402;02/09/2019;802;Klaas;11;Eindhoven;REHV;402;Organic Soy Custard;Organic Products;5;185,00
+1404;03/09/2019;803;Gerda;16;Eindhoven;REHV;402;Organic Soy Custard;Organic Products;7;259,00
+1409;12/09/2019;804;Bertha;11;Eindhoven;REHV;411;Fruit Yogurt Strawberry;Dairy Products;24;526,80
+1414;28/09/2019;806;Karel;12;Eindhoven;REHV;402;Organic Soy Custard;Organic Products;7;259,00
+1415;03/10/2019;806;Karel;11;Eindhoven;REHV;407;Caviar;Luxury Products;22;284,90
+1425;27/11/2019;806;Karel;11;Eindhoven;REHV;404;Organic Soymilk;Organic Products;14;175,00
+1426;30/11/2019;803;Gerda;12;Eindhoven;REHV;410;Full Yogurt;Dairy Products;7;157,50
+1427;06/12/2019;802;Klaas;11;Eindhoven;REHV;408;Fruit Yogurt Mango;Dairy Products;22;385,00
+1430;10/12/2019;805;Harrie;11;Eindhoven;REHV;405;Sweetbread;Luxury Products;11;98,45
+1433;15/12/2019;806;Karel;20;Waalre;REHV;407;Caviar;Luxury Products;9;116,55
+1436;17/12/2019;806;Karel;12;Eindhoven;REHV;402;Organic Soy Custard;Organic Products;9;333,00
+1437;22/12/2019;804;Bertha;12;Eindhoven;REHV;404;Organic Soymilk;Organic Products;17;212,50
+1437;22/12/2019;804;Bertha;12;Eindhoven;REHV;405;Sweetbread;Luxury Products;3;26,85
+1438;26/12/2019;806;Karel;16;Eindhoven;REHV;402;Organic Soy Custard;Organic Products;6;222,00
+1003;08/01/2017;806;Karel;13;Helmond;RHMD;401;Organic Soymilk Sweetened;Organic Products;18;387,00
+1005;19/01/2017;803;Gerda;17;Helmond;RHMD;406;Foie Gras;Luxury Products;19;142,50
+1007;20/01/2017;802;Klaas;17;Helmond;RHMD;401;Organic Soymilk Sweetened;Organic Products;16;344,00
+1012;25/01/2017;806;Karel;13;Helmond;RHMD;402;Organic Soy Custard;Organic Products;7;272,65
+1013;25/01/2017;801;Herman;18;Laarbeek;RHMD;411;Fruit Yogurt Strawberry;Dairy Products;9;179,55
+1022;07/02/2017;802;Klaas;17;Helmond;RHMD;404;Organic Soymilk;Organic Products;17;195,50
+1026;12/02/2017;805;Harrie;17;Helmond;RHMD;402;Organic Soy Custard;Organic Products;6;233,70
+1029;17/02/2017;806;Karel;13;Helmond;RHMD;401;Organic Soymilk Sweetened;Organic Products;18;387,00
+1030;18/02/2017;806;Karel;13;Helmond;RHMD;411;Fruit Yogurt Strawberry;Dairy Products;8;159,60
+1041;17/03/2017;806;Karel;17;Helmond;RHMD;409;Low-Fat Quark;Dairy Products;15;243,75
+1042;17/03/2017;802;Klaas;18;Laarbeek;RHMD;411;Fruit Yogurt Strawberry;Dairy Products;9;179,55
+1044;20/03/2017;804;Bertha;13;Helmond;RHMD;404;Organic Soymilk;Organic Products;11;126,50
+1047;23/03/2017;805;Harrie;18;Laarbeek;RHMD;405;Sweetbread;Luxury Products;12;107,40
+1052;04/04/2017;803;Gerda;13;Helmond;RHMD;409;Low-Fat Quark;Dairy Products;11;178,75
+1055;11/04/2017;802;Klaas;18;Laarbeek;RHMD;409;Low-Fat Quark;Dairy Products;9;146,25
+1057;16/04/2017;805;Harrie;17;Helmond;RHMD;411;Fruit Yogurt Strawberry;Dairy Products;5;99,75
+1062;05/05/2017;801;Herman;13;Helmond;RHMD;407;Caviar;Luxury Products;15;194,25
+1066;18/05/2017;801;Herman;13;Helmond;RHMD;410;Full Yogurt;Dairy Products;6;126,00
+1070;01/06/2017;802;Klaas;18;Laarbeek;RHMD;406;Foie Gras;Luxury Products;15;112,50
+1071;02/06/2017;803;Gerda;13;Helmond;RHMD;401;Organic Soymilk Sweetened;Organic Products;9;193,50
+1073;06/06/2017;803;Gerda;17;Helmond;RHMD;405;Sweetbread;Luxury Products;26;232,70
+1074;09/06/2017;801;Herman;17;Helmond;RHMD;404;Organic Soymilk;Organic Products;6;69,00
+1074;09/06/2017;801;Herman;17;Helmond;RHMD;405;Sweetbread;Luxury Products;21;187,95
+1074;09/06/2017;801;Herman;17;Helmond;RHMD;407;Caviar;Luxury Products;13;168,35
+1084;27/06/2017;804;Bertha;18;Laarbeek;RHMD;404;Organic Soymilk;Organic Products;19;218,50
+1097;01/08/2017;806;Karel;17;Helmond;RHMD;410;Full Yogurt;Dairy Products;12;252,00
+1101;11/08/2017;806;Karel;13;Helmond;RHMD;406;Foie Gras;Luxury Products;19;142,50
+1102;13/08/2017;801;Herman;18;Laarbeek;RHMD;403;Organic Soymilk Chocolat;Organic Products;30;487,50
+1107;21/09/2017;806;Karel;18;Laarbeek;RHMD;402;Organic Soy Custard;Organic Products;11;428,45
+1107;21/09/2017;806;Karel;18;Laarbeek;RHMD;403;Organic Soymilk Chocolat;Organic Products;20;325,00
+1111;28/09/2017;805;Harrie;17;Helmond;RHMD;403;Organic Soymilk Chocolat;Organic Products;18;292,50
+1114;05/10/2017;802;Klaas;18;Laarbeek;RHMD;405;Sweetbread;Luxury Products;9;80,55
+1115;05/10/2017;803;Gerda;17;Helmond;RHMD;401;Organic Soymilk Sweetened;Organic Products;21;451,50
+1115;05/10/2017;803;Gerda;17;Helmond;RHMD;406;Foie Gras;Luxury Products;22;165,00
+1115;05/10/2017;803;Gerda;17;Helmond;RHMD;407;Caviar;Luxury Products;13;168,35
+1116;06/10/2017;802;Klaas;18;Laarbeek;RHMD;405;Sweetbread;Luxury Products;6;53,70
+1117;08/10/2017;805;Harrie;17;Helmond;RHMD;404;Organic Soymilk;Organic Products;5;57,50
+1119;11/10/2017;805;Harrie;13;Helmond;RHMD;404;Organic Soymilk;Organic Products;6;69,00
+1120;12/10/2017;804;Bertha;17;Helmond;RHMD;401;Organic Soymilk Sweetened;Organic Products;8;172,00
+1121;15/10/2017;804;Bertha;18;Laarbeek;RHMD;401;Organic Soymilk Sweetened;Organic Products;23;494,50
+1122;17/10/2017;802;Klaas;13;Helmond;RHMD;407;Caviar;Luxury Products;10;129,50
+1123;18/10/2017;803;Gerda;13;Helmond;RHMD;401;Organic Soymilk Sweetened;Organic Products;13;279,50
+1123;18/10/2017;803;Gerda;13;Helmond;RHMD;409;Low-Fat Quark;Dairy Products;10;162,50
+1125;23/10/2017;802;Klaas;17;Helmond;RHMD;405;Sweetbread;Luxury Products;23;205,85
+1130;01/11/2017;805;Harrie;18;Laarbeek;RHMD;405;Sweetbread;Luxury Products;15;134,25
+1130;01/11/2017;805;Harrie;18;Laarbeek;RHMD;408;Fruit Yogurt Mango;Dairy Products;15;243,75
+1130;01/11/2017;805;Harrie;18;Laarbeek;RHMD;409;Low-Fat Quark;Dairy Products;5;81,25
+1130;01/11/2017;805;Harrie;18;Laarbeek;RHMD;410;Full Yogurt;Dairy Products;2;42,00
+1134;10/11/2017;802;Klaas;17;Helmond;RHMD;409;Low-Fat Quark;Dairy Products;6;97,50
+1136;13/11/2017;801;Herman;13;Helmond;RHMD;407;Caviar;Luxury Products;5;64,75
+1138;17/11/2017;806;Karel;13;Helmond;RHMD;403;Organic Soymilk Chocolat;Organic Products;2;32,50
+1138;17/11/2017;806;Karel;13;Helmond;RHMD;410;Full Yogurt;Dairy Products;12;252,00
+1140;19/11/2017;806;Karel;13;Helmond;RHMD;405;Sweetbread;Luxury Products;19;170,05
+1147;03/12/2017;804;Bertha;13;Helmond;RHMD;409;Low-Fat Quark;Dairy Products;8;130,00
+1149;08/12/2017;806;Karel;18;Laarbeek;RHMD;409;Low-Fat Quark;Dairy Products;7;113,75
+1153;15/12/2017;806;Karel;18;Laarbeek;RHMD;407;Caviar;Luxury Products;19;246,05
+1154;15/12/2017;806;Karel;13;Helmond;RHMD;407;Caviar;Luxury Products;17;220,15
+1156;17/12/2017;806;Karel;18;Laarbeek;RHMD;405;Sweetbread;Luxury Products;21;187,95
+1159;20/12/2017;806;Karel;17;Helmond;RHMD;405;Sweetbread;Luxury Products;5;44,75
+1168;12/01/2018;804;Bertha;13;Helmond;RHMD;406;Foie Gras;Luxury Products;5;37,50
+1172;21/01/2018;805;Harrie;17;Helmond;RHMD;402;Organic Soy Custard;Organic Products;15;599,25
+1181;14/02/2018;802;Klaas;18;Laarbeek;RHMD;402;Organic Soy Custard;Organic Products;14;559,30
+1181;14/02/2018;802;Klaas;18;Laarbeek;RHMD;411;Fruit Yogurt Strawberry;Dairy Products;10;199,50
+1185;25/02/2018;806;Karel;18;Laarbeek;RHMD;403;Organic Soymilk Chocolat;Organic Products;15;243,75
+1189;24/03/2018;801;Herman;13;Helmond;RHMD;404;Organic Soymilk;Organic Products;18;207,00
+1191;29/03/2018;803;Gerda;13;Helmond;RHMD;409;Low-Fat Quark;Dairy Products;12;195,00
+1195;02/04/2018;806;Karel;13;Helmond;RHMD;406;Foie Gras;Luxury Products;21;173,25
+1196;17/04/2018;806;Karel;13;Helmond;RHMD;402;Organic Soy Custard;Organic Products;11;439,45
+1199;19/04/2018;801;Herman;17;Helmond;RHMD;402;Organic Soy Custard;Organic Products;17;679,15
+1204;04/05/2018;803;Gerda;13;Helmond;RHMD;405;Sweetbread;Luxury Products;23;205,85
+1214;01/06/2018;806;Karel;13;Helmond;RHMD;410;Full Yogurt;Dairy Products;21;472,50
+1216;07/06/2018;803;Gerda;17;Helmond;RHMD;407;Caviar;Luxury Products;7;90,65
+1222;23/06/2018;805;Harrie;13;Helmond;RHMD;403;Organic Soymilk Chocolat;Organic Products;5;81,25
+1224;25/06/2018;805;Harrie;13;Helmond;RHMD;401;Organic Soymilk Sweetened;Organic Products;24;516,00
+1225;26/06/2018;801;Herman;17;Helmond;RHMD;401;Organic Soymilk Sweetened;Organic Products;23;494,50
+1227;29/06/2018;802;Klaas;13;Helmond;RHMD;409;Low-Fat Quark;Dairy Products;23;373,75
+1228;04/07/2018;801;Herman;13;Helmond;RHMD;402;Organic Soy Custard;Organic Products;9;359,55
+1233;11/07/2018;802;Klaas;17;Helmond;RHMD;402;Organic Soy Custard;Organic Products;19;759,05
+1233;11/07/2018;802;Klaas;17;Helmond;RHMD;404;Organic Soymilk;Organic Products;12;138,00
+1233;11/07/2018;802;Klaas;17;Helmond;RHMD;405;Sweetbread;Luxury Products;16;143,20
+1238;18/07/2018;806;Karel;18;Laarbeek;RHMD;409;Low-Fat Quark;Dairy Products;7;113,75
+1239;20/07/2018;801;Herman;17;Helmond;RHMD;410;Full Yogurt;Dairy Products;17;382,50
+1245;07/08/2018;805;Harrie;18;Laarbeek;RHMD;402;Organic Soy Custard;Organic Products;23;918,85
+1246;08/08/2018;803;Gerda;13;Helmond;RHMD;411;Fruit Yogurt Strawberry;Dairy Products;22;438,90
+1249;11/08/2018;803;Gerda;17;Helmond;RHMD;408;Fruit Yogurt Mango;Dairy Products;8;140,00
+1253;27/08/2018;805;Harrie;13;Helmond;RHMD;405;Sweetbread;Luxury Products;14;125,30
+1254;30/08/2018;801;Herman;17;Helmond;RHMD;403;Organic Soymilk Chocolat;Organic Products;22;423,50
+1258;08/09/2018;805;Harrie;18;Laarbeek;RHMD;405;Sweetbread;Luxury Products;8;71,60
+1266;21/09/2018;801;Herman;13;Helmond;RHMD;410;Full Yogurt;Dairy Products;20;450,00
+1269;24/09/2018;803;Gerda;18;Laarbeek;RHMD;401;Organic Soymilk Sweetened;Organic Products;21;451,50
+1269;24/09/2018;803;Gerda;18;Laarbeek;RHMD;411;Fruit Yogurt Strawberry;Dairy Products;14;279,30
+1272;03/10/2018;804;Bertha;18;Laarbeek;RHMD;410;Full Yogurt;Dairy Products;21;472,50
+1273;03/10/2018;802;Klaas;13;Helmond;RHMD;410;Full Yogurt;Dairy Products;22;495,00
+1274;07/10/2018;803;Gerda;17;Helmond;RHMD;401;Organic Soymilk Sweetened;Organic Products;7;150,50
+1274;07/10/2018;803;Gerda;17;Helmond;RHMD;402;Organic Soy Custard;Organic Products;16;639,20
+1274;07/10/2018;803;Gerda;17;Helmond;RHMD;404;Organic Soymilk;Organic Products;19;218,50
+1274;07/10/2018;803;Gerda;17;Helmond;RHMD;407;Caviar;Luxury Products;19;246,05
+1274;07/10/2018;803;Gerda;17;Helmond;RHMD;409;Low-Fat Quark;Dairy Products;3;48,75
+1274;07/10/2018;803;Gerda;17;Helmond;RHMD;411;Fruit Yogurt Strawberry;Dairy Products;16;319,20
+1279;18/10/2018;803;Gerda;17;Helmond;RHMD;405;Sweetbread;Luxury Products;24;214,80
+1282;26/10/2018;801;Herman;13;Helmond;RHMD;403;Organic Soymilk Chocolat;Organic Products;7;134,75
+1283;31/10/2018;805;Harrie;13;Helmond;RHMD;402;Organic Soy Custard;Organic Products;9;359,55
+1286;05/11/2018;806;Karel;18;Laarbeek;RHMD;402;Organic Soy Custard;Organic Products;10;370,00
+1296;20/11/2018;806;Karel;17;Helmond;RHMD;407;Caviar;Luxury Products;6;77,70
+1298;29/11/2018;803;Gerda;17;Helmond;RHMD;411;Fruit Yogurt Strawberry;Dairy Products;12;239,40
+1300;04/12/2018;802;Klaas;18;Laarbeek;RHMD;407;Caviar;Luxury Products;6;77,70
+1301;07/12/2018;806;Karel;13;Helmond;RHMD;401;Organic Soymilk Sweetened;Organic Products;18;387,00
+1305;13/12/2018;804;Bertha;18;Laarbeek;RHMD;411;Fruit Yogurt Strawberry;Dairy Products;5;99,75
+1306;18/12/2018;803;Gerda;13;Helmond;RHMD;405;Sweetbread;Luxury Products;12;107,40
+1312;01/01/2019;804;Bertha;18;Laarbeek;RHMD;401;Organic Soymilk Sweetened;Organic Products;15;322,50
+1313;03/01/2019;804;Bertha;18;Laarbeek;RHMD;411;Fruit Yogurt Strawberry;Dairy Products;24;478,80
+1317;17/01/2019;805;Harrie;13;Helmond;RHMD;405;Sweetbread;Luxury Products;18;161,10
+1321;05/02/2019;802;Klaas;18;Laarbeek;RHMD;406;Foie Gras;Luxury Products;20;165,00
+1322;05/02/2019;802;Klaas;18;Laarbeek;RHMD;405;Sweetbread;Luxury Products;24;214,80
+1323;06/02/2019;806;Karel;18;Laarbeek;RHMD;407;Caviar;Luxury Products;7;90,65
+1330;08/03/2019;801;Herman;17;Helmond;RHMD;407;Caviar;Luxury Products;18;233,10
+1331;13/03/2019;803;Gerda;17;Helmond;RHMD;401;Organic Soymilk Sweetened;Organic Products;6;129,00
+1333;15/03/2019;805;Harrie;13;Helmond;RHMD;405;Sweetbread;Luxury Products;20;179,00
+1335;16/03/2019;805;Harrie;17;Helmond;RHMD;403;Organic Soymilk Chocolat;Organic Products;3;45,75
+1335;16/03/2019;805;Harrie;17;Helmond;RHMD;406;Foie Gras;Luxury Products;6;49,50
+1335;16/03/2019;805;Harrie;17;Helmond;RHMD;407;Caviar;Luxury Products;23;297,85
+1335;16/03/2019;805;Harrie;17;Helmond;RHMD;408;Fruit Yogurt Mango;Dairy Products;13;227,50
+1337;25/03/2019;806;Karel;18;Laarbeek;RHMD;410;Full Yogurt;Dairy Products;17;382,50
+1339;05/04/2019;803;Gerda;18;Laarbeek;RHMD;402;Organic Soy Custard;Organic Products;10;370,00
+1341;11/04/2019;803;Gerda;13;Helmond;RHMD;408;Fruit Yogurt Mango;Dairy Products;12;210,00
+1341;11/04/2019;803;Gerda;13;Helmond;RHMD;409;Low-Fat Quark;Dairy Products;8;130,00
+1342;13/04/2019;802;Klaas;18;Laarbeek;RHMD;408;Fruit Yogurt Mango;Dairy Products;20;350,00
+1343;17/04/2019;804;Bertha;18;Laarbeek;RHMD;408;Fruit Yogurt Mango;Dairy Products;16;280,00
+1356;01/06/2019;801;Herman;18;Laarbeek;RHMD;411;Fruit Yogurt Strawberry;Dairy Products;17;373,15
+1357;07/06/2019;802;Klaas;18;Laarbeek;RHMD;411;Fruit Yogurt Strawberry;Dairy Products;6;131,70
+1360;12/06/2019;805;Harrie;13;Helmond;RHMD;410;Full Yogurt;Dairy Products;18;405,00
+1363;01/07/2019;804;Bertha;17;Helmond;RHMD;406;Foie Gras;Luxury Products;14;115,50
+1364;02/07/2019;803;Gerda;13;Helmond;RHMD;411;Fruit Yogurt Strawberry;Dairy Products;21;460,95
+1365;07/07/2019;805;Harrie;17;Helmond;RHMD;407;Caviar;Luxury Products;10;129,50
+1367;10/07/2019;801;Herman;18;Laarbeek;RHMD;401;Organic Soymilk Sweetened;Organic Products;8;172,00
+1370;13/07/2019;804;Bertha;13;Helmond;RHMD;402;Organic Soy Custard;Organic Products;14;518,00
+1372;17/07/2019;805;Harrie;17;Helmond;RHMD;410;Full Yogurt;Dairy Products;22;495,00
+1374;22/07/2019;802;Klaas;13;Helmond;RHMD;410;Full Yogurt;Dairy Products;14;315,00
+1375;24/07/2019;802;Klaas;13;Helmond;RHMD;405;Sweetbread;Luxury Products;6;53,70
+1381;31/07/2019;806;Karel;17;Helmond;RHMD;411;Fruit Yogurt Strawberry;Dairy Products;5;109,75
+1390;15/08/2019;802;Klaas;18;Laarbeek;RHMD;407;Caviar;Luxury Products;16;207,20
+1393;19/08/2019;806;Karel;13;Helmond;RHMD;401;Organic Soymilk Sweetened;Organic Products;17;365,50
+1394;19/08/2019;805;Harrie;17;Helmond;RHMD;402;Organic Soy Custard;Organic Products;12;444,00
+1396;28/08/2019;801;Herman;13;Helmond;RHMD;402;Organic Soy Custard;Organic Products;16;592,00
+1396;28/08/2019;801;Herman;13;Helmond;RHMD;403;Organic Soymilk Chocolat;Organic Products;23;350,75
+1396;28/08/2019;801;Herman;13;Helmond;RHMD;406;Foie Gras;Luxury Products;9;74,25
+1396;28/08/2019;801;Herman;13;Helmond;RHMD;407;Caviar;Luxury Products;12;155,40
+1400;30/08/2019;805;Harrie;18;Laarbeek;RHMD;406;Foie Gras;Luxury Products;6;49,50
+1403;03/09/2019;804;Bertha;18;Laarbeek;RHMD;402;Organic Soy Custard;Organic Products;14;518,00
+1405;04/09/2019;805;Harrie;18;Laarbeek;RHMD;405;Sweetbread;Luxury Products;10;89,50
+1407;10/09/2019;805;Harrie;13;Helmond;RHMD;405;Sweetbread;Luxury Products;15;134,25
+1408;11/09/2019;802;Klaas;17;Helmond;RHMD;411;Fruit Yogurt Strawberry;Dairy Products;9;197,55
+1411;14/09/2019;806;Karel;13;Helmond;RHMD;410;Full Yogurt;Dairy Products;10;225,00
+1412;19/09/2019;805;Harrie;13;Helmond;RHMD;404;Organic Soymilk;Organic Products;8;100,00
+1419;26/10/2019;802;Klaas;13;Helmond;RHMD;406;Foie Gras;Luxury Products;17;140,25
+1420;27/10/2019;805;Harrie;18;Laarbeek;RHMD;407;Caviar;Luxury Products;21;271,95
+1429;08/12/2019;802;Klaas;18;Laarbeek;RHMD;408;Fruit Yogurt Mango;Dairy Products;14;245,00
+1431;11/12/2019;803;Gerda;18;Laarbeek;RHMD;407;Caviar;Luxury Products;22;284,90
+1432;15/12/2019;805;Harrie;18;Laarbeek;RHMD;401;Organic Soymilk Sweetened;Organic Products;6;129,00
+1432;15/12/2019;805;Harrie;18;Laarbeek;RHMD;407;Caviar;Luxury Products;28;362,60
+1434;16/12/2019;804;Bertha;13;Helmond;RHMD;409;Low-Fat Quark;Dairy Products;11;178,75
