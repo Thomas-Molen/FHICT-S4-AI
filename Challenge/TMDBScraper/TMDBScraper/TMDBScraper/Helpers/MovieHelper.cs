@@ -24,14 +24,28 @@ namespace TMDBScraper.Helpers
             TMDBclient = new TMDbClient("22ccb4ae1a1568e8f54ba7191600477c");
         }
 
-        public async Task<Models.Movie> GetNextMovie()
+        public async Task<GetMovieResponse> GetNextMovie()
         {
             TMDBIdEntry movieIdEntry = jsonSerializer.Deserialize<TMDBIdEntry>(jsonReader);
             var movie = await TMDBclient.GetMovieAsync(movieIdEntry.id, MovieMethods.Credits);
-            if (movie.Status != "Released")
+            if (movie.Status != "Released" || movie.Adult)
             {
-                throw new ArgumentException("Given movie is not released yet");
+                throw new ArgumentException("Given movie is not valid");
             }
+
+            List<Actor> actors = new List<Actor>();
+            foreach (var newActor in movie.Credits.Cast)
+            {
+                Actor actor = new Actor
+                {
+                    MovieId = movie.Id,
+                    Gender = newActor.Gender.ToString(),
+                    Name = newActor.Name,
+                    Popularity = newActor.Popularity
+                };
+                actors.Add(actor);
+            }
+
             // Set the cast from the credits in a list of persons and somehow store this in csv
 
             Models.Movie movieToAdd = new Models.Movie
@@ -62,7 +76,13 @@ namespace TMDBScraper.Helpers
                 movieToAdd.Collection = false;
             }
 
-            return movieToAdd;
+            GetMovieResponse result = new GetMovieResponse
+            {
+                Movie = movieToAdd,
+                Actors = actors
+            };
+
+            return result;
         }
     }
 }

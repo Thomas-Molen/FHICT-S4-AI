@@ -14,23 +14,29 @@ namespace TMDBScraper.Helpers
     public class FileHelper
     {
         string currentDateTime;
-        string csvLocation;
+        string movieCsvLocation;
+        string actorCsvLocation;
         string tmdbCompressedIdsLocation;
         public readonly string tmdbIdsLocation = "InputData/currentIds.json";
 
-        StreamWriter writer;
-        CsvWriter csv;
+        StreamWriter movieWriter;
+        CsvWriter movieCsv;
+        StreamWriter actorWriter;
+        CsvWriter actorCsv;
+
         public FileHelper()
         {
             currentDateTime = DateTime.Now.ToString("dd_MM_yyyy_HHMMss");
-            csvLocation = "OutputData/movies_" + currentDateTime + ".csv";
+            movieCsvLocation = "OutputData/movies_" + currentDateTime + ".csv";
+            actorCsvLocation = "OutputData/actors_" + currentDateTime + ".csv";
             tmdbCompressedIdsLocation = "InputData/tmdbIds_" + currentDateTime + ".json.gz";
         }
 
         public void CreateDirectories()
         {   
             Console.WriteLine("Setting up file paths");
-            Directory.CreateDirectory(Path.GetDirectoryName(csvLocation));
+            Directory.CreateDirectory(Path.GetDirectoryName(movieCsvLocation));
+            Directory.CreateDirectory(Path.GetDirectoryName(actorCsvLocation));
             Directory.CreateDirectory(Path.GetDirectoryName("InputData/"));
         }
 
@@ -63,22 +69,35 @@ namespace TMDBScraper.Helpers
 
         public void CreateCSV()
         {
-            writer = new StreamWriter(csvLocation);
-            csv = new CsvWriter(writer, CultureInfo.InvariantCulture);
+            movieWriter = new StreamWriter(movieCsvLocation);
+            movieCsv = new CsvWriter(movieWriter, CultureInfo.InvariantCulture);
 
-            csv.WriteHeader<Movie>();
-            csv.NextRecord();
+            movieCsv.WriteHeader<Movie>();
+            movieCsv.NextRecord();
+
+            actorWriter = new StreamWriter(actorCsvLocation);
+            actorCsv = new CsvWriter(actorWriter, CultureInfo.InvariantCulture);
+
+            actorCsv.WriteHeader<Actor>();
+            actorCsv.NextRecord();
         }
 
-        public void WriteCSV(Movie movie)
+        public void WriteMovie(Movie movie)
         {
-            csv.NextRecord();
-            csv.WriteRecord(movie);   
+            movieCsv.WriteRecord(movie);
+            movieCsv.NextRecord();
+        }
+
+        public void WriteActor(Actor actor)
+        {
+            actorCsv.WriteRecord(actor);
+            actorCsv.NextRecord();
         }
 
         public void CloseCSV()
         {
-            writer.Flush();
+            actorWriter.Flush();
+            movieWriter.Flush();
         }
     }
 }

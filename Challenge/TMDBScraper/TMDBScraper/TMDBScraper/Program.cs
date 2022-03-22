@@ -51,9 +51,14 @@ namespace TMDBScraper
                         {
                             Console.WriteLine("Read " + jsonReader.LineNumber + " Lines");
                         }
-                        var movieToAdd = await movieHelper.GetNextMovie();
+                        var movieResponse = await movieHelper.GetNextMovie();
 
-                        fileHelper.WriteCSV(movieToAdd);
+                        fileHelper.WriteMovie(movieResponse.Movie);
+
+                        foreach (var actor in movieResponse.Actors)
+                        {
+                            fileHelper.WriteActor(actor);
+                        }
                     }
                     catch (Exception)
                     {
