@@ -473,7 +473,7 @@ dmypy.json
 .pyre/
 
 # Challenge dataset file
-Challenge/*.csv
+Challenge/Datasets/**
 
 # Groupchallenge data files
 Group/Datasets/**
