@@ -474,6 +474,7 @@ dmypy.json
 
 # Challenge dataset file
 Challenge/Datasets/**
+Challenge/Iteration0/*.csv
 
 # Groupchallenge data files
 Group/Datasets/**
