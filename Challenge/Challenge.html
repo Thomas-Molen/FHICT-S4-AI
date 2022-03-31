@@ -14002,9 +14002,14 @@ S4-AI41</code></pre>
 <li><a href="#Data-Requirements">Data Requirements</a><ul>
 <li><a href="#TMDb">TMDb</a></li>
 <li><a href="#The-Numbers">The-Numbers</a></li>
+<li><a href="#Requirements">Requirements</a></li>
 </ul>
 </li>
-<li><a href="#Data-Collection">Data Collection</a></li>
+<li><a href="#Data-Collection">Data Collection</a><ul>
+<li><a href="#Movie-Bot">Movie Bot</a></li>
+<li><a href="#Scraper">Scraper</a></li>
+</ul>
+</li>
 <li><a href="#Data-Understanding">Data Understanding</a></li>
 <li><a href="#Data-Preparation">Data Preparation</a></li>
 </ul>
@@ -14091,6 +14096,11 @@ img {float:left}
 <td style="text-align:left">25-03-2022</td>
 <td style="text-align:left">Worked on proposal and provisioning</td>
 </tr>
+<tr>
+<td style="text-align:center">1.2</td>
+<td style="text-align:left">31-03-2022</td>
+<td style="text-align:left">Finished proposal and worked on provisioning</td>
+</tr>
 </tbody>
 </table>
 
@@ -14163,8 +14173,808 @@ If I were to guess this company subsidies TMDb for it's data it can collect on b
 <h4 id="The-Numbers">The-Numbers<a class="anchor-link" href="#The-Numbers">&#182;</a></h4><p>The other website I am interested in is the-numbers, this website is a more news based website focussing on sharing relevant movie news to people for free. This website operates completely for free, however they do not give out their data in an easy way such as a data dump or API's.<br>
 The the-numbers website is part of a parent company called <a href="https://www.nashinfoservices.com/">Nash Information Services, LLC</a>, this company has another daughter company called <a href="https://www.opusdata.com/">OpusData</a> who is a for profit consultant company mainly focussed on the film industry.<br>
 So Nash Information Services, LLC seems to subsidies the-numbers to operate for free to gain public knowledge and interest in the company and their services.</p>
-<h3 id="Data-Collection">Data Collection<a class="anchor-link" href="#Data-Collection">&#182;</a></h3><h3 id="Data-Understanding">Data Understanding<a class="anchor-link" href="#Data-Understanding">&#182;</a></h3><h3 id="Data-Preperation">Data Preperation<a class="anchor-link" href="#Data-Preperation">&#182;</a></h3>
+<h4 id="Requirements">Requirements<a class="anchor-link" href="#Requirements">&#182;</a></h4><p>Now that there is a deeper understanding of where the data comes from, it is time to focus on what the data needs to contain. Seen as I want to predict the profits of movies the data will have to contain some kind of revenue gauge such as revenue, profit or gross (box office) income. This data will have to be complete with no missing data.</p>
+<p>Furthermore there will need to be features to use for the prediction, these can contain data such as datetimes, numbers as budget, popularity, critic review scores, text data such as titles and categorical data such as the genre, writer/director, etc.</p>
+<h3 id="Data-Collection">Data Collection<a class="anchor-link" href="#Data-Collection">&#182;</a></h3><p>Collecting data from the sources shown in <a href="#Data-Sourcing">Data Sourcing</a> and <a href="#Data-Requirements">Data Requirements</a> is luckily fairly easy. TMDb supplies a free API that can be used to fetch movie data, while the-numbers will be a bit harder seen as they do not give an official way of getting their data directly.</p>
+<h4 id="Movie-Bot">Movie Bot<a class="anchor-link" href="#Movie-Bot">&#182;</a></h4><p>For the <a href="https://developers.themoviedb.org/3/getting-started/introduction">TMDb API</a> I will be using a custom C# bot that will fetch an Id sheet (containing all Id's of currently available movies) supplied by TMDb to fetch all movies based on their Id and save it to a csv file. The bot also saves all actors from the movie into a different csv file.</p>
+<p>This bot can be found <a href="https://github.com/Thomas-Molen/FHICT-S4-AI/tree/main/Challenge/TMDBScraper/TMDBScraper">here</a>, to run the bot all you will have to do is run the .exe file and it will create the needed folders/files and start fetching the data. Any movies that are marked as adult movies, not released movies or simply could not be requested from TMDb will be skipped as to avoid corrupted/wrong data be written to the csv files.
+From my experience the bot will do ~10+ movies per second taking around 20 hours to fetch all movies, however this fetchrate is highly based on the speed of the TMDb API (TMDb currently <a href="https://developers.themoviedb.org/3/getting-started/request-rate-limiting">does not</a> have a rate limit on fetch requests).</p>
+<h4 id="Scraper">Scraper<a class="anchor-link" href="#Scraper">&#182;</a></h4><p>the-numbers Does not have an API or frequent data dumps (such as <a href="https://www.imdb.com/interfaces/">IMDb</a>), but the-numbers does have a page containing lists of movies with their release date, title, production cost and worldwide (and domestic) Gross <a href="https://www.the-numbers.com/movie/budgets/all">here</a>.</p>
+<p>The lists on these pages could be gone through and scraped to gather the needed data, I used a free chrome extension called <a href="https://chrome.google.com/webstore/detail/web-scraper-free-web-scra/jnhgnonknehpejjnehehllkliplmbmhn">Web Scraper - Free Web Scraping</a>, this tool is very easy to use for scraping websites and I would highly recommend it.
+The webscraper I am using uses a sitemap system to store the scrapers the sitemap I used can be found <a href="https://pastebin.com/DdFLiESn">here</a> to import into the extension.</p>
+
 </div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Data-Understanding">Data Understanding<a class="anchor-link" href="#Data-Understanding">&#182;</a></h3><p>The first dataset We will be looking at is the raw TMDb movie data gotten from a simple movieId fetch request.<br>
+This file contains only ~1/3 of the total movies.</p>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;numpy version:&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;matplotlib version:&#39;</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>numpy version: 1.20.3
+matplotlib version: 1.3.4
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">omdf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;Datasets/movies_original.csv&#39;</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_columns&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="c1"># I will make all 0 numbers to NaN seen as this will give a quick better overview of the missing data</span>
+<span class="n">omdf</span> <span class="o">=</span> <span class="n">omdf</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+<span class="n">omdf</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<span class="n">omdf</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 248876 entries, 0 to 248875
+Data columns (total 53 columns):
+ #   Column            Non-Null Count   Dtype  
+---  ------            --------------   -----  
+ 0   Favorite          248876 non-null  bool   
+ 1   Id                0 non-null       float64
+ 2   Rating            0 non-null       float64
+ 3   Watchlist         248876 non-null  bool   
+ 4   Adult             248876 non-null  bool   
+ 5   Id.1              0 non-null       float64
+ 6   BackdropPath      86867 non-null   object 
+ 7   BackdropPath.1    7014 non-null    object 
+ 8   Id.2              11889 non-null   float64
+ 9   Name              11889 non-null   object 
+ 10  PosterPath        9306 non-null    object 
+ 11  Budget            16450 non-null   float64
+ 12  Id.3              0 non-null       float64
+ 13  Homepage          27580 non-null   object 
+ 14  Id.4              248876 non-null  int64  
+ 15  ImdbId            207292 non-null  object 
+ 16  Id.5              0 non-null       float64
+ 17  Page              0 non-null       float64
+ 18  TotalPages        0 non-null       float64
+ 19  TotalResults      0 non-null       float64
+ 20  OriginalLanguage  248876 non-null  object 
+ 21  OriginalTitle     248875 non-null  object 
+ 22  Overview          224058 non-null  object 
+ 23  Popularity        248876 non-null  float64
+ 24  PosterPath.1      166958 non-null  object 
+ 25  ReleaseDate       241101 non-null  object 
+ 26  Id.6              0 non-null       float64
+ 27  Id.7              0 non-null       float64
+ 28  ImdbId.1          0 non-null       float64
+ 29  FacebookId        0 non-null       float64
+ 30  TwitterId         0 non-null       float64
+ 31  InstagramId       0 non-null       float64
+ 32  Id.8              0 non-null       float64
+ 33  Revenue           11309 non-null   float64
+ 34  Page.1            0 non-null       float64
+ 35  TotalPages.1      0 non-null       float64
+ 36  TotalResults.1    0 non-null       float64
+ 37  Runtime           199093 non-null  float64
+ 38  Page.2            0 non-null       float64
+ 39  TotalPages.2      0 non-null       float64
+ 40  TotalResults.2    0 non-null       float64
+ 41  Page.3            0 non-null       float64
+ 42  TotalPages.3      0 non-null       float64
+ 43  TotalResults.3    0 non-null       float64
+ 44  Status            248875 non-null  object 
+ 45  Tagline           51850 non-null   object 
+ 46  Title             248874 non-null  object 
+ 47  Id.9              0 non-null       float64
+ 48  Video             10446 non-null   object 
+ 49  Id.10             0 non-null       float64
+ 50  Id.11             0 non-null       float64
+ 51  VoteAverage       165616 non-null  float64
+ 52  VoteCount         165716 non-null  float64
+dtypes: bool(3), float64(34), int64(1), object(15)
+memory usage: 95.7+ MB
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[9]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Favorite</th>
+      <th>Id</th>
+      <th>Rating</th>
+      <th>Watchlist</th>
+      <th>Adult</th>
+      <th>Id.1</th>
+      <th>BackdropPath</th>
+      <th>BackdropPath.1</th>
+      <th>Id.2</th>
+      <th>Name</th>
+      <th>PosterPath</th>
+      <th>Budget</th>
+      <th>Id.3</th>
+      <th>Homepage</th>
+      <th>Id.4</th>
+      <th>ImdbId</th>
+      <th>Id.5</th>
+      <th>Page</th>
+      <th>TotalPages</th>
+      <th>TotalResults</th>
+      <th>OriginalLanguage</th>
+      <th>OriginalTitle</th>
+      <th>Overview</th>
+      <th>Popularity</th>
+      <th>PosterPath.1</th>
+      <th>ReleaseDate</th>
+      <th>Id.6</th>
+      <th>Id.7</th>
+      <th>ImdbId.1</th>
+      <th>FacebookId</th>
+      <th>TwitterId</th>
+      <th>InstagramId</th>
+      <th>Id.8</th>
+      <th>Revenue</th>
+      <th>Page.1</th>
+      <th>TotalPages.1</th>
+      <th>TotalResults.1</th>
+      <th>Runtime</th>
+      <th>Page.2</th>
+      <th>TotalPages.2</th>
+      <th>TotalResults.2</th>
+      <th>Page.3</th>
+      <th>TotalPages.3</th>
+      <th>TotalResults.3</th>
+      <th>Status</th>
+      <th>Tagline</th>
+      <th>Title</th>
+      <th>Id.9</th>
+      <th>Video</th>
+      <th>Id.10</th>
+      <th>Id.11</th>
+      <th>VoteAverage</th>
+      <th>VoteCount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>False</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>False</td>
+      <td>False</td>
+      <td>NaN</td>
+      <td>/dvQj1GBZAZirz1skEEZyWH2ZqQP.jpg</td>
+      <td>/qMr0HqAhfYmIkSVs6W5xuxwEIbR.jpg</td>
+      <td>177062.0</td>
+      <td>Blondie Collection</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>3924</td>
+      <td>tt0029927</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>en</td>
+      <td>Blondie</td>
+      <td>Blondie and Dagwood are about to celebrate the...</td>
+      <td>1.879</td>
+      <td>/o6UMTE2LzQdlKVxRnFECPmtQjsJ.jpg</td>
+      <td>11/30/1938 00:00:00</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>70.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Released</td>
+      <td>NaN</td>
+      <td>Blondie</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>7.1</td>
+      <td>5.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>False</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>False</td>
+      <td>False</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>6124</td>
+      <td>tt0011436</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>de</td>
+      <td>Der Mann ohne Namen</td>
+      <td>Der Mann ohne Namen is a German adventure movi...</td>
+      <td>0.726</td>
+      <td>/6xUbUCvndklbGVYiljHr34NTxSl.jpg</td>
+      <td>01/01/1921 00:00:00</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>420.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Released</td>
+      <td>NaN</td>
+      <td>Peter Voss, Thief of Millions</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>False</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>False</td>
+      <td>False</td>
+      <td>NaN</td>
+      <td>/uJlc4aNPF3Y8yAqahJTKBwgwPVW.jpg</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>8773</td>
+      <td>tt0055747</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>fr</td>
+      <td>L'amour à vingt ans</td>
+      <td>Love at Twenty unites five directors from five...</td>
+      <td>2.544</td>
+      <td>/aup2QCYCsyEeQfpboXy0f4uj8aE.jpg</td>
+      <td>06/22/1962 00:00:00</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>110.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Released</td>
+      <td>The Intimate Secrets of Young Lovers</td>
+      <td>Love at Twenty</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>6.8</td>
+      <td>37.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>False</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>False</td>
+      <td>False</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>/1qojhAFNz8Q7cz6B3M14fFAFVv.jpg</td>
+      <td>425256.0</td>
+      <td>New World Disorder</td>
+      <td>/7oLgGicfFSYVb1buliHxcxx7CTa.jpg</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>http://www.nwdfilms.com</td>
+      <td>25449</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>en</td>
+      <td>New World Disorder 9: Never Enough</td>
+      <td>Gee Atherton ripping the Worlds course the day...</td>
+      <td>0.652</td>
+      <td>/okQY6jVmRU19CUbYPUZC77K3XBE.jpg</td>
+      <td>12/08/2008 00:00:00</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>69.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Released</td>
+      <td>NaN</td>
+      <td>New World Disorder 9: Never Enough</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>4.5</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>False</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>False</td>
+      <td>False</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>31975</td>
+      <td>tt1656746</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>en</td>
+      <td>Sesame Street: Elmo Loves You!</td>
+      <td>Elmo is making a very, very super special surp...</td>
+      <td>0.923</td>
+      <td>/qKWcCmvGr4g0dgXvhqAc4BAMCtk.jpg</td>
+      <td>01/05/2010 00:00:00</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>46.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Released</td>
+      <td>NaN</td>
+      <td>Sesame Street: Elmo Loves You!</td>
+      <td>NaN</td>
+      <td>True</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>There are a lot of Id columns, this is a side-effect from writing the JSON data gotten from the API directly into a csv file, these Ids could have been lists of data or did not have a valid property name to use as column name. For this reason most of these Id columns are missing or have incorrect data.
+From comparing the Ids with the TMDb website I found that Id.4 contains the movieIds as stored by TMDb while ImdbId contains the Ids as stored by IMDb.</p>
+<p>This dataset also contains personal data from the account used to fetch the API, this data is not of any use seen as it is personal account data (and the account used for the API does not use any of these features), these columns are: Favorite, Rating, Watchlist.</p>
+<p>Furthermore a lot of columns contain data used for displaying the movie such as poster images or the pagenumbers, these columns will also not be of any use for this project. These columns are: BackdropPath.x, PoserPath.x, HomePage, Page.x, TotalPages.x, TotalResults.x and video.</p>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fomdf</span> <span class="o">=</span> <span class="n">omdf</span><span class="p">[[</span><span class="s1">&#39;Adult&#39;</span><span class="p">,</span> <span class="s1">&#39;Name&#39;</span><span class="p">,</span> <span class="s1">&#39;Budget&#39;</span><span class="p">,</span> <span class="s1">&#39;Id.4&#39;</span><span class="p">,</span> <span class="s1">&#39;ImdbId&#39;</span><span class="p">,</span> <span class="s1">&#39;OriginalLanguage&#39;</span><span class="p">,</span> <span class="s1">&#39;OriginalTitle&#39;</span><span class="p">,</span> <span class="s1">&#39;Overview&#39;</span><span class="p">,</span> <span class="s1">&#39;Popularity&#39;</span><span class="p">,</span> <span class="s1">&#39;ReleaseDate&#39;</span><span class="p">,</span> <span class="s1">&#39;Revenue&#39;</span><span class="p">,</span> <span class="s1">&#39;Runtime&#39;</span><span class="p">,</span> <span class="s1">&#39;Status&#39;</span><span class="p">,</span> <span class="s1">&#39;Tagline&#39;</span><span class="p">,</span> <span class="s1">&#39;Title&#39;</span><span class="p">,</span> <span class="s1">&#39;VoteAverage&#39;</span><span class="p">,</span> <span class="s1">&#39;VoteCount&#39;</span><span class="p">]]</span>
+<span class="n">fomdf</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<span class="n">fomdf</span><span class="p">[</span><span class="o">~</span><span class="n">fomdf</span><span class="p">[</span><span class="s1">&#39;Revenue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 248876 entries, 0 to 248875
+Data columns (total 17 columns):
+ #   Column            Non-Null Count   Dtype  
+---  ------            --------------   -----  
+ 0   Adult             248876 non-null  bool   
+ 1   Name              11889 non-null   object 
+ 2   Budget            16450 non-null   float64
+ 3   Id.4              248876 non-null  int64  
+ 4   ImdbId            207292 non-null  object 
+ 5   OriginalLanguage  248876 non-null  object 
+ 6   OriginalTitle     248875 non-null  object 
+ 7   Overview          224058 non-null  object 
+ 8   Popularity        248876 non-null  float64
+ 9   ReleaseDate       241101 non-null  object 
+ 10  Revenue           11309 non-null   float64
+ 11  Runtime           199093 non-null  float64
+ 12  Status            248875 non-null  object 
+ 13  Tagline           51850 non-null   object 
+ 14  Title             248874 non-null  object 
+ 15  VoteAverage       165616 non-null  float64
+ 16  VoteCount         165716 non-null  float64
+dtypes: bool(1), float64(6), int64(1), object(9)
+memory usage: 30.6+ MB
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[12]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Adult</th>
+      <th>Name</th>
+      <th>Budget</th>
+      <th>Id.4</th>
+      <th>ImdbId</th>
+      <th>OriginalLanguage</th>
+      <th>OriginalTitle</th>
+      <th>Overview</th>
+      <th>Popularity</th>
+      <th>ReleaseDate</th>
+      <th>Revenue</th>
+      <th>Runtime</th>
+      <th>Status</th>
+      <th>Tagline</th>
+      <th>Title</th>
+      <th>VoteAverage</th>
+      <th>VoteCount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>7</th>
+      <td>False</td>
+      <td>NaN</td>
+      <td>4000000.0</td>
+      <td>5</td>
+      <td>tt0113101</td>
+      <td>en</td>
+      <td>Four Rooms</td>
+      <td>It's Ted the Bellhop's first night on the job....</td>
+      <td>16.897</td>
+      <td>12/09/1995 00:00:00</td>
+      <td>4257354.0</td>
+      <td>98.0</td>
+      <td>Released</td>
+      <td>Twelve outrageous guests. Four scandalous requ...</td>
+      <td>Four Rooms</td>
+      <td>5.7</td>
+      <td>2119.0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>False</td>
+      <td>NaN</td>
+      <td>21000000.0</td>
+      <td>6</td>
+      <td>tt0107286</td>
+      <td>en</td>
+      <td>Judgment Night</td>
+      <td>While racing to a boxing match, Frank, Mike, J...</td>
+      <td>10.801</td>
+      <td>10/15/1993 00:00:00</td>
+      <td>12136938.0</td>
+      <td>110.0</td>
+      <td>Released</td>
+      <td>Don't move. Don't whisper. Don't even breathe.</td>
+      <td>Judgment Night</td>
+      <td>6.5</td>
+      <td>228.0</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>False</td>
+      <td>Star Wars Collection</td>
+      <td>11000000.0</td>
+      <td>11</td>
+      <td>tt0076759</td>
+      <td>en</td>
+      <td>Star Wars</td>
+      <td>Princess Leia is captured and held hostage by ...</td>
+      <td>96.633</td>
+      <td>05/25/1977 00:00:00</td>
+      <td>775398007.0</td>
+      <td>121.0</td>
+      <td>Released</td>
+      <td>A long time ago in a galaxy far, far away...</td>
+      <td>Star Wars</td>
+      <td>8.2</td>
+      <td>16942.0</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>False</td>
+      <td>Finding Nemo Collection</td>
+      <td>94000000.0</td>
+      <td>12</td>
+      <td>tt0266543</td>
+      <td>en</td>
+      <td>Finding Nemo</td>
+      <td>Nemo, an adventurous young clownfish, is unexp...</td>
+      <td>125.016</td>
+      <td>05/30/2003 00:00:00</td>
+      <td>940335536.0</td>
+      <td>100.0</td>
+      <td>Released</td>
+      <td>There are 3.7 trillion fish in the ocean. They...</td>
+      <td>Finding Nemo</td>
+      <td>7.8</td>
+      <td>16097.0</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>False</td>
+      <td>NaN</td>
+      <td>55000000.0</td>
+      <td>13</td>
+      <td>tt0109830</td>
+      <td>en</td>
+      <td>Forrest Gump</td>
+      <td>A man with a low IQ has accomplished great thi...</td>
+      <td>74.714</td>
+      <td>07/06/1994 00:00:00</td>
+      <td>677387716.0</td>
+      <td>142.0</td>
+      <td>Released</td>
+      <td>Life is like a box of chocolates...you never k...</td>
+      <td>Forrest Gump</td>
+      <td>8.5</td>
+      <td>22294.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Removing the unneeded columns leaves the dataset with 16 columns:<br>
+Adult column shows if the movie is an adult film (not 18+ rating but actual adult films).<br>
+Name is the name a collection / series the movie might be a part of (think starwars, harrypotter, the godfather).<br>
+Budget is the movie budget.<br>
+Id.4 is the unique identifier used internally to identify movies from TMDb.<br>
+ImdbId is the unique identifier used by IMDb (same purpose as Id.4).<br>
+OriginalLanguage has the main langauge originally spoken in the movie.<br>
+OriginalTitle is the title first used during the production and possibly release of the movie.<br>
+Overview has a description of the movie.<br>
+Popularity is a score given by TMDb based on the amount of visits a movie's page gets on their website.<br>
+Revenue has the revenue in dollars.<br>
+Runtime has the length of the movie in minutes.<br>
+Status has the status of the movie, either being in Production, Announced or Released.<br>
+Tagline is a shorter description of the movie.<br>
+Title is the movietitle it released with, if the title did not change it will be the same as the OriginalTitle.<br>
+VoteAverage is the score given to users on the TMDb website from a 0-10 range on average.<br>
+VoteCount shows the amount of people who voted on the movie's score.</p>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Data-Preperation">Data Preperation<a class="anchor-link" href="#Data-Preperation">&#182;</a></h3>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
