@@ -478,3 +478,4 @@ Challenge/Iteration0/*.csv
 
 # Groupchallenge data files
 Group/Datasets/**
+Group/ANWB/roadworks/**
