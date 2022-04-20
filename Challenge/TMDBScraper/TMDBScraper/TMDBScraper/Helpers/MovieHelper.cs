@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TMDbLib.Client;
+using TMDbLib.Objects.General;
 using TMDbLib.Objects.Movies;
 using TMDBScraper.Models;
 
@@ -63,7 +64,9 @@ namespace TMDBScraper.Helpers
                 Language = movie.OriginalLanguage,
                 Cast = movie.Credits?.Cast?.Count,
                 Crew = movie.Credits?.Crew?.Count,
-                Genre = movie.Genres?.FirstOrDefault()?.Name ?? null
+                Genre = movie.Genres?.FirstOrDefault()?.Name ?? null,
+                Director = movie.Credits?.Crew?.FirstOrDefault(c => c.Job == "Director")?.Name,
+                DirectorPopularity = movie.Credits?.Crew?.FirstOrDefault(c => c.Job == "Director")?.Popularity
             };
 
             // Disgusting check for collection

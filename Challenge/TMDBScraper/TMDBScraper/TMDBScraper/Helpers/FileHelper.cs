@@ -1,12 +1,10 @@
 ﻿using CsvHelper;
+using CsvHelper.Configuration;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.IO.Compression;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using TMDBScraper.Models;
 
 namespace TMDBScraper.Helpers
@@ -69,14 +67,21 @@ namespace TMDBScraper.Helpers
 
         public void CreateCSV()
         {
+            // Setting csv rules
+            var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+            {
+                NewLine = Environment.NewLine,
+                Delimiter = "|"
+            };
+
             movieWriter = new StreamWriter(movieCsvLocation);
-            movieCsv = new CsvWriter(movieWriter, CultureInfo.InvariantCulture);
+            movieCsv = new CsvWriter(movieWriter, config);
 
             movieCsv.WriteHeader<Movie>();
             movieCsv.NextRecord();
 
             actorWriter = new StreamWriter(actorCsvLocation);
-            actorCsv = new CsvWriter(actorWriter, CultureInfo.InvariantCulture);
+            actorCsv = new CsvWriter(actorWriter, config);
 
             actorCsv.WriteHeader<Actor>();
             actorCsv.NextRecord();
