@@ -62,11 +62,12 @@ namespace TMDBScraper.Helpers
                 Company = movie.ProductionCompanies?.FirstOrDefault()?.Name ?? null,
                 Country = movie.ProductionCountries?.FirstOrDefault()?.Iso_3166_1 ?? null,
                 Language = movie.OriginalLanguage,
-                Cast = movie.Credits?.Cast?.Count,
-                Crew = movie.Credits?.Crew?.Count,
+                CastSize = movie.Credits?.Cast?.Count,
+                CrewSize = movie.Credits?.Crew?.Count,
                 Genre = movie.Genres?.FirstOrDefault()?.Name ?? null,
                 Director = movie.Credits?.Crew?.FirstOrDefault(c => c.Job == "Director")?.Name,
-                DirectorPopularity = movie.Credits?.Crew?.FirstOrDefault(c => c.Job == "Director")?.Popularity
+                DirectorPopularity = movie.Credits?.Crew?.FirstOrDefault(c => c.Job == "Director")?.Popularity,
+                CastPopularity = movie.Credits?.Cast?.Sum(c => c.Popularity)
             };
 
             // Disgusting check for collection

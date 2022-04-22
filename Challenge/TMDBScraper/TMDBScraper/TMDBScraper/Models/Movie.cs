@@ -19,9 +19,10 @@ namespace TMDBScraper.Models
         public long? Revenue { get; set; }
         public int? Runtime { get; set; }
         public string Title { get; set; }
-        public int? Cast { get; set; }
-        public int? Crew { get; set; }
+        public int? CastSize { get; set; }
+        public int? CrewSize { get; set; }
         public string Director { get; set; }
         public float? DirectorPopularity { get; set; }
+        public float? CastPopularity { get; set; }
     }
 }
