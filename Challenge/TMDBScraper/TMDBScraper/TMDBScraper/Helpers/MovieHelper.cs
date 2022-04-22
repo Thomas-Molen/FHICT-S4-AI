@@ -67,7 +67,8 @@ namespace TMDBScraper.Helpers
                 Genre = movie.Genres?.FirstOrDefault()?.Name ?? null,
                 Director = movie.Credits?.Crew?.FirstOrDefault(c => c.Job == "Director")?.Name,
                 DirectorPopularity = movie.Credits?.Crew?.FirstOrDefault(c => c.Job == "Director")?.Popularity,
-                CastPopularity = movie.Credits?.Cast?.Sum(c => c.Popularity)
+                CastPopularity = movie.Credits?.Cast?.Sum(c => c.Popularity),
+                Cast = string.Join(",", movie.Credits?.Cast?.Select(c => c.Name))
             };
 
             // Disgusting check for collection

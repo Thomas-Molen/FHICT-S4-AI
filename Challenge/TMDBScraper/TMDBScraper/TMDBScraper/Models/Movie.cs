@@ -24,5 +24,6 @@ namespace TMDBScraper.Models
         public string Director { get; set; }
         public float? DirectorPopularity { get; set; }
         public float? CastPopularity { get; set; }
+        public string Cast { get; set; }
     }
 }
