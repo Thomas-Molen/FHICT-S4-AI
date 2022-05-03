@@ -1,0 +1,10 @@
+version: "3"
+services:
+  revenue-predictor-uplink:
+    # if failure  or server restarts, container will restart
+    restart: always 
+    container_name: revenue-predictor-uplink
+    image: revenue-predictor-uplink
+    build: 
+      # build classifier image from the Dockerfile in the current directory
+      context: . 
